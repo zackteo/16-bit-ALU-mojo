@@ -1,0 +1,8 @@
+* 16 bit ALU (Arithmetic Logic Unit) 
+Done in Mojo FPGA
+
+* Components
+** Adder
+** Boolean
+** Compare
+** Shifter
