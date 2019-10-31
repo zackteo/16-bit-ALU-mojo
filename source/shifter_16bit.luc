@@ -5,44 +5,30 @@ module shifter_16bit (
     output s[16]
   ) {
   
-    sig shl_1b[16];
-    sig shl_2b[16];
-    sig shl_4b[16];
-    sig shl_8b[16];
-  
-    sig shr_1b[16];
-    sig shr_2b[16];
-    sig shr_4b[16];
-    sig shr_8b[16];
-  
-    sig sra_1b[16];
-    sig sra_2b[16];
-    sig sra_4b[16];
-    sig sra_8b[16];
-    
-    sig shl[16];
-    sig shr[16];
-    sig sra[16];
-  
   always {
-    // shl
-    if(b[4]) // move 8 bit
+    // first initialize to all 0
+    s[15:0] = 0;
+    
+    //alufn signal 11 is for SRA
+    if(alufn[1] & alufn[0])
     {
-        
+        s[15:0] = a[15:0] >>> b[3:0];
     }
     
-    //choosing output here
-    if(alufn[1] & alufn[0]) //11 = SRA
+    //alufn signal 01 or 10 (using bitwise XOR)
+    if(alufn[1] ^ alufn[0])
     {
-        s[15:0] = sra[15:0];
+        if(alufn[0]) //SHR if 01
+            s[15:0] = a[15:0] >> b[3:0];
+        
+        if(alufn[1]) //SLA if 10
+            s[15:0] = a[15:0] <<< b[3:0];
     }
-    if(alufn[1] ^ alufn[0]) //assuming we will not give a wrong alufn.. 01 = SHR
-    {
-        s[15:0] = shr[15:0];
-    }
+    
+    //alufn signal 00 is for SHL
     if(~alufn[1] & ~alufn[0]) //00 = shl
     {
-        s[15:0] = shl[15:0];
+        s[15:0] = a[15:0] << b[3:0];
     }
   }
 }
