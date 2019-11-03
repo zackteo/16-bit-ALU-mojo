@@ -6,30 +6,27 @@ module boolean_16bit (
   ) {
 
   always {
-    // first initialise s[0] to 0 (false)
-    s[0] = 0;
+    // first initialise s[15:0] to 0
+    s[15:0] = 0;
   
     // AND function
     if (alufn[3:0] == 1000){
-      s[0] = a && b;
+      s[15:0] = a[15:0] && b[15:0];
     }
     // OR function
     if (alufn[3:0] == 1110){
-      s[0] = a || b;
+      s[15:0] = a[15:0] || b[15:0];
     }
     // XOR function
     if (alufn[3:0] == 0110){
-      s[0] = a ^ b;
+      s[15:0] = a[15:0] ^ b[15:0];
     }
     // true if a function
-    if (alufn[3:0] == 1010 && a[15:0]==0){
-      s[0] = 1;
+    if (alufn[3:0] == 1010){
+      s[15:0] = a[15:0];
     }
     // true if b function (additional)
-    if (alufn[3:0] == 0101 && b[15:0]==0){
-      s[0] = 1;
-    
-    //setting the rest of the output s[15:0]
-    s[15:1] = 0;
+    if (alufn[3:0] == 0101){
+      s[15:0] = b[15:0];
   }
 }
