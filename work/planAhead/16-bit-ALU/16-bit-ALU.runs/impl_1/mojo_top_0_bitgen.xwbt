@@ -1,8 +1,8 @@
 INTSTYLE=pa
-INFILE=/home/zackteo/mojo/16-bit-ALU/work/planAhead/16-bit-ALU/16-bit-ALU.runs/impl_1/mojo_top_0_routed.ncd
-OUTFILE=/home/zackteo/mojo/16-bit-ALU/work/planAhead/16-bit-ALU/16-bit-ALU.runs/impl_1/mojo_top_0.bit
+INFILE=C:\Users\Matthew\Documents\GitHub\16-bit-ALU-mojo\work\planAhead\16-bit-ALU\16-bit-ALU.runs\impl_1\mojo_top_0_routed.ncd
+OUTFILE=C:\Users\Matthew\Documents\GitHub\16-bit-ALU-mojo\work\planAhead\16-bit-ALU\16-bit-ALU.runs\impl_1\mojo_top_0.bit
 FAMILY=Spartan6
 PART=xc6slx9-2tqg144
-WORKINGDIR=/home/zackteo/mojo/16-bit-ALU/work/planAhead/16-bit-ALU/16-bit-ALU.runs/impl_1
+WORKINGDIR=C:\Users\Matthew\Documents\GitHub\16-bit-ALU-mojo\work\planAhead\16-bit-ALU\16-bit-ALU.runs\impl_1
 LICENSE=WebPack
-USER_INFO=211818782_0_0_639
+USER_INFO=211803230_0_0_716

@@ -1,9 +1,4 @@
 module adder_16bit_1 (
-    /* I don't think I need this
-    input clk,  // clock
-    input rst,  // reset
-    output out
-    */
     input a[16],
     input b[16],
     input alufn[1],
@@ -23,7 +18,7 @@ module adder_16bit_1 (
     //alufn signal 00000 1 is for SUB
     if(alufn[0])
     {
-      s[15:0] = a[15:0] + b[15:0];
+      s[15:0] = a[15:0] - b[15:0];
     }    
   }
 }

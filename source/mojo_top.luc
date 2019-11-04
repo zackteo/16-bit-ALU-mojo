@@ -10,15 +10,35 @@ module mojo_top (
     output spi_channel [4], // AVR general purpose pins (used by default to select ADC channel)
     input avr_tx,           // AVR TX (FPGA RX)
     output avr_rx,          // AVR RX (FPGA TX)
-    input avr_rx_busy       // AVR RX buffer full
+    input avr_rx_busy,      // AVR RX buffer full
+    output io_led [3][8],   // LEDs on IO Shield
+    input io_button [5],    // 5 buttons on IO Shield
+    input io_dip [3][8],     // DIP switches on IO Shield
+    
+    //input a[16],
+    input b[16],
+    input alufn[6]
   ) {
   
-  sig rst;                  // reset signal
+  sig rst;
+  
+  alu alu;
   
   .clk(clk) {
     // The reset conditioner is used to synchronize the reset signal to the FPGA
     // clock. This ensures the entire FPGA comes out of reset at the same time.
     reset_conditioner reset_cond;
+    button_conditioner btn_cond;
+    edge_detector edge_dt(#RISE(1),#FALL(0));
+    .rst(rst) {
+      fsm state = {
+      ADD, SUB, 
+      CMPEQ, CMPLT, CMPLE, 
+      OR, NOR, XOR, A, B, AND, NAND, 
+      SHL, SHLA, SHR, SHRA, 
+      IDLE, FAIL, PASS};
+    }
+    dff counter[28];
   }
   
   always {
@@ -29,5 +49,23 @@ module mojo_top (
     spi_miso = bz;          // not using SPI
     spi_channel = bzzzz;    // not using flags
     avr_rx = bz;            // not using serial port
+    
+    io_led = 3x{{8h00}};    // turn LEDs off
+    
+    alu.a[7:0] = io_dip[0][7:0];
+    alu.a[15:8] = io_dip[1][7:0];
+    alu.b[15:0] = b[15:0];
+    alu.alufn[5:0] = alufn[5:0];
+    
+    btn_cond.in=io_button[4];
+    edge_dt.in=btn_cond.out;
+    
+    io_led[0][7:0] = alu.s[7:0];
+    io_led[1][7:0] = alu.s[15:8];
+    
+    //counter.d = counter.q + 1;
+  
+    //if (counter.q[25:0]==0){
+    //}
   }
 }

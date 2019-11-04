@@ -9,7 +9,7 @@ module adder_16bit_2 (
 
   always {
     // expression given for v
-    v = (a[15] | b[15] | !(s[15])) & (!(a[15]) | !(b[15]) | s[15]);
+    v = (a[15] | b[15] | ~(s[15])) & (~(a[15]) | ~(b[15]) | s[15]);
     
     // if negative, 16-bit will be 1
     n = s[15];

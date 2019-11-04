@@ -15,6 +15,12 @@ module alu (
   compare16bit compare;
   
   always {
+    //Assign all output to 0
+    s[15:0] = 0;
+    v[0] = 0;
+    z[0] = 0;
+    n[0] = 0;    
+    
     //ADD & SUB
     adder1.a[15:0] = a[15:0];
     adder1.b[15:0] = b[15:0];
@@ -41,19 +47,11 @@ module alu (
     compare.v[0] = adder2.v[0];
     compare.n[0] = adder2.n[0];
     
-    //Assing all output to 0
-    s[15:0] = 0;
-    v[0] = 0;
-    z[0] = 0;
-    n[0] = 0;
     
     //Choosing output
     if(alufn[5:4] == 00)
     {
         s[15:0] = adder1.s[15:0];
-        v[0] = adder2.v[0];
-        n[0] = adder2.n[0];
-        z[0] = adder2.z[0];
     }
     
     if(alufn[5:4] == 01)

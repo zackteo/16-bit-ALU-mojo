@@ -16,20 +16,78 @@ module mojo_top_0 (
     output reg [3:0] spi_channel,
     input avr_tx,
     output reg avr_rx,
-    input avr_rx_busy
+    input avr_rx_busy,
+    output reg [23:0] io_led,
+    input [4:0] io_button,
+    input [23:0] io_dip,
+    input [15:0] b,
+    input [5:0] alufn
   );
   
   
   
   reg rst;
   
+  wire [16-1:0] M_alu_s;
+  wire [1-1:0] M_alu_v;
+  wire [1-1:0] M_alu_n;
+  wire [1-1:0] M_alu_z;
+  reg [16-1:0] M_alu_a;
+  reg [16-1:0] M_alu_b;
+  reg [6-1:0] M_alu_alufn;
+  alu_1 alu (
+    .a(M_alu_a),
+    .b(M_alu_b),
+    .alufn(M_alu_alufn),
+    .s(M_alu_s),
+    .v(M_alu_v),
+    .n(M_alu_n),
+    .z(M_alu_z)
+  );
+  
   wire [1-1:0] M_reset_cond_out;
   reg [1-1:0] M_reset_cond_in;
-  reset_conditioner_1 reset_cond (
+  reset_conditioner_2 reset_cond (
     .clk(clk),
     .in(M_reset_cond_in),
     .out(M_reset_cond_out)
   );
+  wire [1-1:0] M_btn_cond_out;
+  reg [1-1:0] M_btn_cond_in;
+  button_conditioner_3 btn_cond (
+    .clk(clk),
+    .in(M_btn_cond_in),
+    .out(M_btn_cond_out)
+  );
+  wire [1-1:0] M_edge_dt_out;
+  reg [1-1:0] M_edge_dt_in;
+  edge_detector_4 edge_dt (
+    .clk(clk),
+    .in(M_edge_dt_in),
+    .out(M_edge_dt_out)
+  );
+  localparam ADD_state = 5'd0;
+  localparam SUB_state = 5'd1;
+  localparam CMPEQ_state = 5'd2;
+  localparam CMPLT_state = 5'd3;
+  localparam CMPLE_state = 5'd4;
+  localparam OR_state = 5'd5;
+  localparam NOR_state = 5'd6;
+  localparam XOR_state = 5'd7;
+  localparam A_state = 5'd8;
+  localparam B_state = 5'd9;
+  localparam AND_state = 5'd10;
+  localparam NAND_state = 5'd11;
+  localparam SHL_state = 5'd12;
+  localparam SHLA_state = 5'd13;
+  localparam SHR_state = 5'd14;
+  localparam SHRA_state = 5'd15;
+  localparam IDLE_state = 5'd16;
+  localparam FAIL_state = 5'd17;
+  localparam PASS_state = 5'd18;
+  
+  reg [4:0] M_state_d, M_state_q = ADD_state;
+  reg [27:0] M_counter_d, M_counter_q = 1'h0;
   
   always @* begin
     M_reset_cond_in = ~rst_n;
@@ -38,5 +96,25 @@ module mojo_top_0 (
     spi_miso = 1'bz;
     spi_channel = 4'bzzzz;
     avr_rx = 1'bz;
+    io_led = 24'h000000;
+    M_alu_a[0+7-:8] = io_dip[0+0+7-:8];
+    M_alu_a[8+7-:8] = io_dip[8+0+7-:8];
+    M_alu_b[0+15-:16] = b[0+15-:16];
+    M_alu_alufn[0+5-:6] = alufn[0+5-:6];
+    M_btn_cond_in = io_button[4+0-:1];
+    M_edge_dt_in = M_btn_cond_out;
+    io_led[0+0+7-:8] = M_alu_s[0+7-:8];
+    io_led[8+0+7-:8] = M_alu_s[8+7-:8];
   end
+  
+  always @(posedge clk) begin
+    M_counter_q <= M_counter_d;
+    
+    if (rst == 1'b1) begin
+      M_state_q <= 1'h0;
+    end else begin
+      M_state_q <= M_state_d;
+    end
+  end
+  
 endmodule
