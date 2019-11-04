@@ -8,6 +8,7 @@
     <src top="true">mojo_top.luc</src>
     <src>compare16bit.luc</src>
     <src>ALU.luc</src>
+    <ucf>io.ucf</ucf>
     <ucf lib="true">mojo.ucf</ucf>
     <component>reset_conditioner.luc</component>
   </files>
