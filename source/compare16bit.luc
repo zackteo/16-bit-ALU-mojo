@@ -1,0 +1,12 @@
+module compare16bit(
+//inputs and outputs 
+  input alufn[2], 
+  input z, 
+  input v, 
+  input n, 
+  input cmp[16],
+  output out) {
+//so how do i implement a mux here lol 
+ always {
+}
+}  
