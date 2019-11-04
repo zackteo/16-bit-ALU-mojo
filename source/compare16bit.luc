@@ -1,12 +1,25 @@
-module compare16bit(
+module compare16bit (
 //inputs and outputs 
-  input alufn[2], 
+  input alufn[6], 
   input z, 
   input v, 
   input n, 
-  input cmp[16],
-  output out) {
-//so how do i implement a mux here lol 
+  output cmp[16]
+    ) {
  always {
-}
+  //initialise cmp[15:1] to 0 
+    cmp[15:1] = 0;
+
+    if (alufn[2:1] == 00) {
+    cmp[0] = 0;}
+    
+    if (alufn[1:0] == 10){
+    cmp[0] = n ^ v;}
+      
+    if (alufn[1:0] == 01){
+    cmp[0] = z;}
+      
+    if (alufn[1:0] == 11){
+    cmp[0] = (n^v) | z;}
+  }
 }  
