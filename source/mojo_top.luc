@@ -63,9 +63,48 @@ module mojo_top (
     io_led[0][7:0] = alu.s[7:0];
     io_led[1][7:0] = alu.s[15:8];
     
-    //counter.d = counter.q + 1;
+    counter.d = counter.q + 1;
   
-    //if (counter.q[25:0]==0){
-    //}
+    if (counter.q[25:0]==0){
+    
+      case(state.q){
+      
+        state.IDLE:
+          if (io_button[4]==1){
+            state.d = state.ADD;
+          }
+          
+        state.ADD:
+          alu.alufn[5:0]=000000;
+          alu.a[15:0]=0010101010101011;
+          alu.b[15:0]=0000000000001000;
+          if (alu.s==0010101010101011+0000000000001000){
+            state.d = state.SUB;
+          }
+          else{
+            state.d = state.FAIL;
+          }  
+            
+        state.SUB:
+          alu.alufn[5:0]=000001;
+          alu.a[15:0]=0010101010101011;
+          alu.b[15:0]=0000000000001000;
+          if (alu.s==0010101010101011-0000000000001000){
+            state.d = state.CMPEQ;
+          }
+          else{
+            state.d = state.FAIL;
+          }  
+         
+      
+      }
+    }
+    case(state.q){
+      
+      state.IDLE:
+        io_led[2][7]=1;
+        
+        
+    }
   }
 }

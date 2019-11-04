@@ -10,13 +10,13 @@ module adder_16bit_1 (
     s[15:0] = 0;
     
     //alufn signal 00000 0 is for ADD
-    if(!(alufn[0]))
+    if(alufn[0]==0)
     {
       s[15:0] = a[15:0] + b[15:0];
     }
     
     //alufn signal 00000 1 is for SUB
-    if(alufn[0])
+    if(alufn[0]==1)
     {
       s[15:0] = a[15:0] - b[15:0];
     }    

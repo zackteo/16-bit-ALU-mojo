@@ -1,0 +1,19 @@
+module multiply_16bit (
+    input a[16],
+    input b[16],
+    input alufn[6],
+    output s[16]
+  ) {
+
+  always {
+    //initialise as 0
+    s[15:0]=0;
+    
+    // multiply code is 000010
+    if (alufn[1:0]==10){
+  
+      s[15:0]=a[15:0]*b[15:0];
+    
+    }
+  }
+}
