@@ -1,0 +1,74 @@
+module alu (
+    input a[16],
+    input b[16],
+    input alufn[6],
+    output s[16],
+    output v[1],
+    output n[1],
+    output z[1]
+  ) {
+
+  adder_16bit_1 adder1;
+  adder_16bit_2 adder2;
+  boolean_16bit bool;
+  shifter_16bit shift;
+  compare16bit compare;
+  
+  always {
+    //ADD & SUB
+    adder1.a[15:0] = a[15:0];
+    adder1.b[15:0] = b[15:0];
+    adder1.alufn = alufn[0];
+    
+    adder2.a[15:0] = a[15:0];
+    adder2.b[15:0] = b[15:0];
+    adder2.s[15:0] = adder1.s[15:0];
+    
+    
+    //BOOL
+    bool.a[15:0] = a[15:0];
+    bool.b[15:0] = b[15:0];
+    bool.alufn[5:0] = alufn[5:0];
+    
+    //SHIFT
+    shift.a[15:0] = a[15:0];
+    shift.b[3:0] = b[3:0];
+    shift.alufn[5:0] = alufn[5:0];
+    
+    //COMPARE
+    compare.alufn[5:0] = alufn[5:0];
+    compare.z[0] = adder2.z[0];
+    compare.v[0] = adder2.v[0];
+    compare.n[0] = adder2.n[0];
+    
+    //Assing all output to 0
+    s[15:0] = 0;
+    v[0] = 0;
+    z[0] = 0;
+    n[0] = 0;
+    
+    //Choosing output
+    if(alufn[5:4] == 00)
+    {
+        s[15:0] = adder1.s[15:0];
+        v[0] = adder2.v[0];
+        n[0] = adder2.n[0];
+        z[0] = adder2.z[0];
+    }
+    
+    if(alufn[5:4] == 01)
+    {
+        s[15:0] = bool.s[15:0];
+    }
+    
+    if(alufn[5:4] == 10)
+    {
+        s[15:0] = shift.s[15:0];
+    }
+    
+    if(alufn[5:4] == 11)
+    {
+        s[15:0] = compare.s[15:0];
+    }
+  }
+}

@@ -1,7 +1,7 @@
 module shifter_16bit (
     input a[16],
     input b[4],
-    input alufn[2],
+    input alufn[6],
     output s[16]
   ) {
   
