@@ -13,10 +13,18 @@ module boolean_16bit (
     if (alufn[3:0] == 1000){
       s[15:0] = a[15:0] && b[15:0];
     }
+    // NAND function
+    if (alufn[3:0] == 0111){
+      s[15:0] = !(a[15:0] && b[15:0]);
+    }
     // OR function
     if (alufn[3:0] == 1110){
       s[15:0] = a[15:0] || b[15:0];
     }
+    // NOR function
+    if (alufn[3:0] == 0001){
+      s[15:0] = !(a[15:0] || b[15:0]);
+    }  
     // XOR function
     if (alufn[3:0] == 0110){
       s[15:0] = a[15:0] ^ b[15:0];
@@ -28,5 +36,6 @@ module boolean_16bit (
     // true if b function (additional)
     if (alufn[3:0] == 0101){
       s[15:0] = b[15:0];
+    }
   }
 }
