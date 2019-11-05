@@ -1,8 +1,56 @@
-* 16 bit ALU (Arithmetic Logic Unit) 
-Done in Mojo FPGA
+* 16-bit Arithmetic Logic Unit (ALU) 
+2-input 16-bit ALU using the Lucid programming language for the Mojo V3 FPGA (Field-programmable gate array) development board (Spartan 6).
+** Done by:
+   - Zachary Teo
+   - Amanda Kosim
+   - Wong Wei En Matthew
+   - Chow Jia Yi
+** Functionality
+*** Standard ALU operations 
+**** Arithmetic (+, -)
+     - Zero, Z
+       - indicating all bits of S are logic zero
+     - Negative, N
+       - indicating the result is a negative
+     - Overflow, V
+       - indicating the result has exceeded the numeric range of S
+**** Bitwise logical (AND, NAND, OR, NOR, XOR, "A", "B") 
+**** Bit Shift (SL, SR, SLA, SRA) 
+**** Comparison (==, <, <=)
+**** Multiply (/*)
+*** Additional Functionality
+    - Automated testing
+*** Table of functions
+| ALUFN [5:4] | ALUFN[3:0] | Short-form | Operation                        |
+|-------------+------------+------------+----------------------------------|
+|          00 |       0000 | ADD        | Addition (+)                     |
+|             |       0001 | SUB        | Subtraction (-)                  |
+|             |       0010 | MUL        | Multiply (*)                     |
+|-------------+------------+------------+----------------------------------|
+|          01 |       1000 | AND        | A & B                            |
+|             |       0111 | NAND       | ~(A & B)                         |
+|             |       1110 | OR         | A or B                           |
+|             |       0001 | NOR        | ~(A or B)                        |
+|             |       0110 | XOR        | A ^ B                            |
+|             |       1010 | "A"        | (A)                              |
+|             |       1100 | "B"        | (B)                              |
+|-------------+------------+------------+----------------------------------|
+|          10 |       0000 | SL         | Shift Left (>>)                  |
+|             |       0001 | SR         | Shift Right (<<)                 |
+|             |       0010 | SLA        | Shift Left Arithmetically (>>>)  |
+|             |       0011 | SRA        | Shift Right Arithmetically (<<<) |
+|-------------+------------+------------+----------------------------------|
+|          11 |       0011 | COMPEQ     | Equal (==)                       |
+|             |       0101 | COMPLE     | Less than (<)                    |
+|             |       0111 | COMPLT     | Less than or Equal (<=)          |
+** Implementation
+The 16-bit is made of the modules below and implemented as its own ALU module, making it hierarchical and modular, for reusability.
+The ALU module is then implemented in mojo_top.luc
+- Adder module
+  - part 1: adding/subtracting
+  - part 2: taking S to evaluate z,v,n
+- Boolean module
+- Compare module
+- Shifter module
+- Multiply module
 
-* Components
-** Adder
-** Boolean
-** Compare
-** Shifter
