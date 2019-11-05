@@ -72,14 +72,14 @@ module mojo_top (
       
         state.IDLE:
           if (io_button[4]==1){
-            state.d = state.NAND;
+            state.d = state.ADD;
           }
           
         state.ADD:
-          alu.alufn[5:0]=000000;
-          alu.a[15:0]=0010101010101011;
-          alu.b[15:0]=0000000000001000;
-          if (alu.s==0010101010110011){
+          alu.alufn[5:0]=b000000;
+          alu.a[15:0]=b0010101010101011;
+          alu.b[15:0]=b0000000000001000;
+          if (alu.s==b0010101010110011){
             state.d = state.SUB;
           }
           else{
@@ -87,10 +87,10 @@ module mojo_top (
           }  
             
         state.SUB:
-          alu.alufn[5:0]=000001;
-          alu.a[15:0]=0010101010101011;
-          alu.b[15:0]=0000000000001000;
-          if (alu.s==0010101010100011){
+          alu.alufn[5:0]=b000001;
+          alu.a[15:0]=b0010101010101011;
+          alu.b[15:0]=b0000000000001000;
+          if (alu.s==b0010101010100011){
             state.d = state.MUL;
           }
           else{
@@ -99,9 +99,9 @@ module mojo_top (
           
         state.MUL:
           alu.alufn[5:0]=000010;
-          alu.a[15:0]=0000000000000011;
-          alu.b[15:0]=0000000000000001;
-          if (alu.s==0000000000000011){
+          alu.a[15:0]=b0000000000000011;
+          alu.b[15:0]=b0000000000000001;
+          if (alu.s==b0000000000000011){
             state.d = state.CMPEQ;
           }
           else{
@@ -110,9 +110,9 @@ module mojo_top (
           
         state.CMPEQ:
           alu.alufn[5:0]=110011;
-          alu.a[15:0]=0000000000000011;
-          alu.b[15:0]=0000000000000011;
-          if (alu.s==0000000000000001){
+          alu.a[15:0]=b0000000000000011;
+          alu.b[15:0]=b0000000000000011;
+          if (alu.s==b0000000000000001){
             state.d = state.CMPLT;
           }
           else{
@@ -120,10 +120,10 @@ module mojo_top (
           }   
           
         state.CMPLT:
-          alu.alufn[5:0]=110111;
-          alu.a=0000000000000011;
-          alu.b=0000000000000111;
-          if (alu.s==0000000000000001){
+          alu.alufn[5:0]=110101;
+          alu.a=b0000000000000011;
+          alu.b=b0000000000000111;
+          if (alu.s==b0000000000000001){
             state.d = state.CMPLE;
           }
           else{
@@ -131,10 +131,10 @@ module mojo_top (
           }
 
         state.CMPLE:
-          alu.alufn[5:0]=110101;
-          alu.a=0000000000000011;
-          alu.b=0000000000101011;
-          if (alu.s==0000000000000001){
+          alu.alufn[5:0]=110111;
+          alu.a=b0000000000000011;
+          alu.b=b0000000000101011;
+          if (alu.s==b0000000000000001){
             state.d = state.OR;
           }
           else{
@@ -143,9 +143,9 @@ module mojo_top (
 
         state.OR:
           alu.alufn[5:0]=011110;
-          alu.a=0000000011111111;
-          alu.b=0000111100001111;
-          if (alu.s==0000111111111111){
+          alu.a=b0000000011111111;
+          alu.b=b0000111100001111;
+          if (alu.s==b0000111111111111){
             state.d = state.NOR;
           }
           else{
@@ -154,9 +154,9 @@ module mojo_top (
 
         state.NOR:
           alu.alufn[5:0]=010001;
-          alu.a=0000000011111111;
-          alu.b=0000111100001111;
-          if (alu.s==1111000000000000){
+          alu.a=b0000000011111111;
+          alu.b=b0000111100001111;
+          if (alu.s==b1111000000000000){
             state.d = state.XOR;
           }
           else{
@@ -165,9 +165,9 @@ module mojo_top (
 
         state.XOR:
           alu.alufn[5:0]=010110;
-          alu.a=0000000011111111;
-          alu.b=0000111100001111;
-          if (alu.s==0000111111110000){
+          alu.a=b0000000011111111;
+          alu.b=b0000111100001111;
+          if (alu.s==b0000111111110000){
             state.d = state.A;
           }
           else{
@@ -176,9 +176,9 @@ module mojo_top (
 
         state.A:
           alu.alufn[5:0]=011010;
-          alu.a=0000000011111111;
-          alu.b=0000111100001111;
-          if (alu.s==0000000011111111){
+          alu.a=b0000000011111111;
+          alu.b=b0000111100001111;
+          if (alu.s==b0000000011111111){
             state.d = state.B;
           }
           else{
@@ -187,9 +187,9 @@ module mojo_top (
 
         state.B:
           alu.alufn[5:0]=011100;
-          alu.a=0000000011111111;
-          alu.b=0000111100001111;
-          if (alu.s==0000111100001111){
+          alu.a=b0000000011111111;
+          alu.b=b0000111100001111;
+          if (alu.s==b0000111100001111){
             state.d = state.AND;
           }
           else{
@@ -198,9 +198,9 @@ module mojo_top (
 
         state.AND:
           alu.alufn[5:0]=011000;
-          alu.a=0000000011111111;
-          alu.b=0000111100001111;
-          if (alu.s==0000000000001111){
+          alu.a=b0000000011111111;
+          alu.b=b0000111100001111;
+          if (alu.s==b0000000000001111){
             state.d = state.NAND;
           }
           else{
@@ -209,10 +209,10 @@ module mojo_top (
 
         state.NAND:
           alu.alufn[5:0]=010111;
-          alu.a=0000000011111111;
-          alu.b=0000111100001111;
-          if (alu.s==1111111111110000){
-            state.d = state.SHL;
+          alu.a=b0000000011111111;
+          alu.b=b0000111100001111;
+          if (alu.s==b1111111111110000){
+            state.d = state.PASS;
           }
           else{
             state.d = state.FAIL;
@@ -264,7 +264,10 @@ module mojo_top (
         io_led[1][4]=1;       
         
       state.FAIL:
-        io_led[2][7:0]=11111111;   
+        io_led[2][7:4]=1111;   
+        
+      state.PASS:
+        io_led[2][3:0]=1111;  
     }
   }
 }

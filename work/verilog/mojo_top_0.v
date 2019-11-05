@@ -109,24 +109,24 @@ module mojo_top_0 (
       case (M_state_q)
         IDLE_state: begin
           if (io_button[4+0-:1] == 1'h1) begin
-            M_state_d = NAND_state;
+            M_state_d = ADD_state;
           end
         end
         ADD_state: begin
-          M_alu_alufn[0+5-:6] = 1'h0;
-          M_alu_a[0+15-:16] = 44'h92fd31e7313;
-          M_alu_b[0+15-:16] = 10'h3e8;
-          if (M_alu_s == 44'h92fd31e963b) begin
+          M_alu_alufn[0+5-:6] = 6'h00;
+          M_alu_a[0+15-:16] = 16'h2aab;
+          M_alu_b[0+15-:16] = 16'h0008;
+          if (M_alu_s == 16'h2ab3) begin
             M_state_d = SUB_state;
           end else begin
             M_state_d = FAIL_state;
           end
         end
         SUB_state: begin
-          M_alu_alufn[0+5-:6] = 1'h1;
-          M_alu_a[0+15-:16] = 44'h92fd31e7313;
-          M_alu_b[0+15-:16] = 10'h3e8;
-          if (M_alu_s == 44'h92fd31e6f2b) begin
+          M_alu_alufn[0+5-:6] = 6'h01;
+          M_alu_a[0+15-:16] = 16'h2aab;
+          M_alu_b[0+15-:16] = 16'h0008;
+          if (M_alu_s == 16'h2aa3) begin
             M_state_d = MUL_state;
           end else begin
             M_state_d = FAIL_state;
@@ -134,9 +134,9 @@ module mojo_top_0 (
         end
         MUL_state: begin
           M_alu_alufn[0+5-:6] = 4'ha;
-          M_alu_a[0+15-:16] = 4'hb;
-          M_alu_b[0+15-:16] = 1'h1;
-          if (M_alu_s == 4'hb) begin
+          M_alu_a[0+15-:16] = 16'h0003;
+          M_alu_b[0+15-:16] = 16'h0001;
+          if (M_alu_s == 16'h0003) begin
             M_state_d = CMPEQ_state;
           end else begin
             M_state_d = FAIL_state;
@@ -144,29 +144,29 @@ module mojo_top_0 (
         end
         CMPEQ_state: begin
           M_alu_alufn[0+5-:6] = 17'h1adbb;
-          M_alu_a[0+15-:16] = 4'hb;
-          M_alu_b[0+15-:16] = 4'hb;
-          if (M_alu_s == 1'h1) begin
+          M_alu_a[0+15-:16] = 16'h0003;
+          M_alu_b[0+15-:16] = 16'h0003;
+          if (M_alu_s == 16'h0001) begin
             M_state_d = CMPLT_state;
           end else begin
             M_state_d = FAIL_state;
           end
         end
         CMPLT_state: begin
-          M_alu_alufn[0+5-:6] = 17'h1ae1f;
-          M_alu_a = 4'hb;
-          M_alu_b = 7'h6f;
-          if (M_alu_s == 1'h1) begin
+          M_alu_alufn[0+5-:6] = 17'h1ae15;
+          M_alu_a = 16'h0003;
+          M_alu_b = 16'h0007;
+          if (M_alu_s == 16'h0001) begin
             M_state_d = CMPLE_state;
           end else begin
             M_state_d = FAIL_state;
           end
         end
         CMPLE_state: begin
-          M_alu_alufn[0+5-:6] = 17'h1ae15;
-          M_alu_a = 4'hb;
-          M_alu_b = 17'h18a93;
-          if (M_alu_s == 1'h1) begin
+          M_alu_alufn[0+5-:6] = 17'h1ae1f;
+          M_alu_a = 16'h0003;
+          M_alu_b = 16'h002b;
+          if (M_alu_s == 16'h0001) begin
             M_state_d = OR_state;
           end else begin
             M_state_d = FAIL_state;
@@ -174,9 +174,9 @@ module mojo_top_0 (
         end
         OR_state: begin
           M_alu_alufn[0+5-:6] = 14'h2b66;
-          M_alu_a = 24'ha98ac7;
-          M_alu_b = 37'h19de137b57;
-          if (M_alu_s == 37'h19debd01c7) begin
+          M_alu_a = 16'h00ff;
+          M_alu_b = 16'h0f0f;
+          if (M_alu_s == 16'h0fff) begin
             M_state_d = NOR_state;
           end else begin
             M_state_d = FAIL_state;
@@ -184,9 +184,9 @@ module mojo_top_0 (
         end
         NOR_state: begin
           M_alu_alufn[0+5-:6] = 14'h2711;
-          M_alu_a = 24'ha98ac7;
-          M_alu_b = 37'h19de137b57;
-          if (M_alu_s == 50'h3f272d8587000) begin
+          M_alu_a = 16'h00ff;
+          M_alu_b = 16'h0f0f;
+          if (M_alu_s == 16'hf000) begin
             M_state_d = XOR_state;
           end else begin
             M_state_d = FAIL_state;
@@ -194,9 +194,9 @@ module mojo_top_0 (
         end
         XOR_state: begin
           M_alu_alufn[0+5-:6] = 14'h277e;
-          M_alu_a = 24'ha98ac7;
-          M_alu_b = 37'h19de137b57;
-          if (M_alu_s == 37'h19debcfd70) begin
+          M_alu_a = 16'h00ff;
+          M_alu_b = 16'h0f0f;
+          if (M_alu_s == 16'h0ff0) begin
             M_state_d = A_state;
           end else begin
             M_state_d = FAIL_state;
@@ -204,9 +204,9 @@ module mojo_top_0 (
         end
         A_state: begin
           M_alu_alufn[0+5-:6] = 14'h2b02;
-          M_alu_a = 24'ha98ac7;
-          M_alu_b = 37'h19de137b57;
-          if (M_alu_s == 24'ha98ac7) begin
+          M_alu_a = 16'h00ff;
+          M_alu_b = 16'h0f0f;
+          if (M_alu_s == 16'h00ff) begin
             M_state_d = B_state;
           end else begin
             M_state_d = FAIL_state;
@@ -214,9 +214,9 @@ module mojo_top_0 (
         end
         B_state: begin
           M_alu_alufn[0+5-:6] = 14'h2b5c;
-          M_alu_a = 24'ha98ac7;
-          M_alu_b = 37'h19de137b57;
-          if (M_alu_s == 37'h19de137b57) begin
+          M_alu_a = 16'h00ff;
+          M_alu_b = 16'h0f0f;
+          if (M_alu_s == 16'h0f0f) begin
             M_state_d = AND_state;
           end else begin
             M_state_d = FAIL_state;
@@ -224,9 +224,9 @@ module mojo_top_0 (
         end
         AND_state: begin
           M_alu_alufn[0+5-:6] = 14'h2af8;
-          M_alu_a = 24'ha98ac7;
-          M_alu_b = 37'h19de137b57;
-          if (M_alu_s == 11'h457) begin
+          M_alu_a = 16'h00ff;
+          M_alu_b = 16'h0f0f;
+          if (M_alu_s == 16'h000f) begin
             M_state_d = NAND_state;
           end else begin
             M_state_d = FAIL_state;
@@ -234,10 +234,10 @@ module mojo_top_0 (
         end
         NAND_state: begin
           M_alu_alufn[0+5-:6] = 14'h277f;
-          M_alu_a = 24'ha98ac7;
-          M_alu_b = 37'h19de137b57;
-          if (M_alu_s == 50'h3f28cb7156d70) begin
-            M_state_d = SHL_state;
+          M_alu_a = 16'h00ff;
+          M_alu_b = 16'h0f0f;
+          if (M_alu_s == 16'hfff0) begin
+            M_state_d = PASS_state;
           end else begin
             M_state_d = FAIL_state;
           end
@@ -289,7 +289,10 @@ module mojo_top_0 (
         io_led[8+4+0-:1] = 1'h1;
       end
       FAIL_state: begin
-        io_led[16+0+7-:8] = 24'ha98ac7;
+        io_led[16+4+3-:4] = 11'h457;
+      end
+      PASS_state: begin
+        io_led[16+0+3-:4] = 11'h457;
       end
     endcase
   end
