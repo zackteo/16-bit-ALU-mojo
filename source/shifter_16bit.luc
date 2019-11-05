@@ -19,11 +19,6 @@ module shifter_16bit (
     {
         s[15:0] = a[15:0] >> b[3:0];
     }
-        
-    if(alufn[1:0] == b10) //SLA if 10
-    {
-        s[15:0] = a[15:0] <<< b[3:0];
-    }
     
     //alufn signal 00 is for SHL
     if(alufn[1:0] == b00) //00 = shl

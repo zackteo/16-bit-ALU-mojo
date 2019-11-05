@@ -36,7 +36,7 @@ module mojo_top (
       ADD, SUB, MUL,
       CMPEQ, CMPLT, CMPLE, 
       OR, NOR, XOR, A, B, AND, NAND, 
-      SHL, SHLA, SHR, SHRA, 
+      SHL, SHR, SHRA, 
       FAIL, PASS};
     }
     dff counter[28];
@@ -226,23 +226,12 @@ module mojo_top (
           alu.a=b0000000000000001;
           alu.b=b0000000000000001;
           if (alu.s==b0000000000000010){
-            state.d = state.SHLA;
-          }
-          else{
-            state.d = state.FAIL;
-          }
-
-        state.SHLA:
-          alu.alufn[5:0]=b100010;
-          alu.a=b0000000000000001;
-          alu.b=b0000000000000001;
-          if (alu.s==b0000000000000010){
             state.d = state.SHR;
           }
           else{
             state.d = state.FAIL;
           }
-
+          
         state.SHR:
           alu.alufn[5:0]=b100001;
           alu.a=b1000000000000010;
