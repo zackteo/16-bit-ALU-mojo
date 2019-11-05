@@ -100,10 +100,10 @@ module alu_1 (
     M_shift_b[0+3-:4] = b[0+3-:4];
     M_shift_alufn[0+1-:2] = alufn[0+1-:2];
     M_compare_alufn[0+5-:6] = alufn[0+5-:6];
-    M_compare_z[0+0-:1] = M_adder2_z[0+0-:1];
-    M_compare_v[0+0-:1] = M_adder2_v[0+0-:1];
-    M_compare_n[0+0-:1] = M_adder2_n[0+0-:1];
-    if (alufn[4+1-:2] == 1'h0) begin
+    M_compare_z = M_adder2_z;
+    M_compare_v = M_adder2_v;
+    M_compare_n = M_adder2_n;
+    if (alufn[4+1-:2] == 2'h0) begin
       if (alufn[1+0-:1] == 1'h0) begin
         s[0+15-:16] = M_adder1_s[0+15-:16];
       end
@@ -111,13 +111,13 @@ module alu_1 (
         s[0+15-:16] = M_mul_s[0+15-:16];
       end
     end
-    if (alufn[4+1-:2] == 1'h1) begin
+    if (alufn[4+1-:2] == 2'h1) begin
       s[0+15-:16] = M_bool_s[0+15-:16];
     end
-    if (alufn[4+1-:2] == 4'ha) begin
+    if (alufn[4+1-:2] == 2'h2) begin
       s[0+15-:16] = M_shift_s[0+15-:16];
     end
-    if (alufn[4+1-:2] == 4'hb) begin
+    if (alufn[4+1-:2] == 2'h3) begin
       s[0+15-:16] = M_compare_s[0+15-:16];
     end
   end

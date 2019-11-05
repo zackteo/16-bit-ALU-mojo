@@ -41,13 +41,13 @@ module alu (
     
     //COMPARE
     compare.alufn[5:0] = alufn[5:0];
-    compare.z[0] = adder2.z[0];
-    compare.v[0] = adder2.v[0];
-    compare.n[0] = adder2.n[0];
+    compare.z = adder2.z;
+    compare.v = adder2.v;
+    compare.n = adder2.n;
     
     
     //Choosing output
-    if(alufn[5:4] == 00)
+    if(alufn[5:4] == b00)
     {
       if (alufn[1]==0){
         s[15:0] = adder1.s[15:0];
@@ -57,17 +57,17 @@ module alu (
       }
     }
     
-    if(alufn[5:4] == 01)
+    if(alufn[5:4] == b01)
     {
         s[15:0] = bool.s[15:0];
     }
     
-    if(alufn[5:4] == 10)
+    if(alufn[5:4] == b10)
     {
         s[15:0] = shift.s[15:0];
     }
     
-    if(alufn[5:4] == 11)
+    if(alufn[5:4] == b11)
     {
         s[15:0] = compare.s[15:0];
     }
