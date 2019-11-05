@@ -6,8 +6,8 @@
     <src>adder_16bit_1.luc</src>
     <src>boolean_16bit.luc</src>
     <src>multiply_16bit.luc</src>
-    <src>adder_16bit_2.luc</src>
     <src top="true">mojo_top.luc</src>
+    <src>adder_16bit_2.luc</src>
     <src>compare16bit.luc</src>
     <ucf>io.ucf</ucf>
     <ucf lib="true">mojo.ucf</ucf>

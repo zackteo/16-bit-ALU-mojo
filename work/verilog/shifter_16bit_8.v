@@ -15,16 +15,16 @@ module shifter_16bit_8 (
   
   always @* begin
     s[0+15-:16] = 1'h0;
-    if (alufn[1+0-:1] == 1'h1 && alufn[0+0-:1] == 1'h1) begin
-      s[0+15-:16] = a[0+15-:16] >>> b[0+3-:4];
+    if (alufn[0+1-:2] == 2'h3) begin
+      s[0+15-:16] = $signed(a[0+15-:16]) >>> b[0+3-:4];
     end
-    if (alufn[0+0-:1] == 1'h1 && alufn[1+0-:1] == 1'h0) begin
+    if (alufn[0+1-:2] == 2'h1) begin
       s[0+15-:16] = a[0+15-:16] >> b[0+3-:4];
     end
-    if (alufn[1+0-:1] == 1'h1 && alufn[0+0-:1] == 1'h0) begin
+    if (alufn[0+1-:2] == 2'h2) begin
       s[0+15-:16] = a[0+15-:16] <<< b[0+3-:4];
     end
-    if (alufn[1+0-:1] == 1'h0 && alufn[0+0-:1] == 1'h0) begin
+    if (alufn[0+1-:2] == 2'h0) begin
       s[0+15-:16] = a[0+15-:16] << b[0+3-:4];
     end
   end

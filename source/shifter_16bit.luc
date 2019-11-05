@@ -12,7 +12,7 @@ module shifter_16bit (
     //alufn signal 11 is for SRA
     if(alufn[1:0] == b11)
     {
-        s[15:0] = a[15:0] >>> b[3:0];
+        s[15:0] = $signed(a[15:0]) >>> b[3:0];
     }
     
     if(alufn[1:0] == b01) //SHR if 01

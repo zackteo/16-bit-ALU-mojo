@@ -140,11 +140,13 @@ Unit <boolean_16bit_7> synthesized.
 
 Synthesizing Unit <shifter_16bit_8>.
     Related source file is "C:/Users/Matthew/Documents/GitHub/16-bit-ALU-mojo/work/planAhead/16-bit-ALU/16-bit-ALU.srcs/sources_1/imports/verilog/shifter_16bit_8.v".
-    Found 16-bit shifter logical right for signal <a[15]_b[3]_shift_right_2_OUT> created at line 19
-    Found 16-bit shifter logical left for signal <a[15]_b[3]_shift_left_10_OUT> created at line 25
+    Found 16-bit shifter arithmetic right for signal <a[15]_b[3]_shift_right_1_OUT> created at line 19
+    Found 16-bit shifter logical right for signal <a[15]_b[3]_shift_right_4_OUT> created at line 22
+    Found 16-bit shifter logical left for signal <a[15]_b[3]_shift_left_7_OUT> created at line 25
+    Found 16-bit 4-to-1 multiplexer for signal <s> created at line 11.
     Summary:
-	inferred   4 Multiplexer(s).
-	inferred   2 Combinational logic shifter(s).
+	inferred   1 Multiplexer(s).
+	inferred   3 Combinational logic shifter(s).
 Unit <shifter_16bit_8> synthesized.
 
 Synthesizing Unit <compare16bit_9>.
@@ -190,13 +192,14 @@ Macro Statistics
 # Registers                                            : 2
  28-bit register                                       : 1
  4-bit register                                        : 1
-# Multiplexers                                         : 41
+# Multiplexers                                         : 38
  1-bit 4-to-1 multiplexer                              : 1
- 16-bit 2-to-1 multiplexer                             : 37
- 16-bit 4-to-1 multiplexer                             : 1
+ 16-bit 2-to-1 multiplexer                             : 33
+ 16-bit 4-to-1 multiplexer                             : 2
  24-bit 22-to-1 multiplexer                            : 1
  6-bit 2-to-1 multiplexer                              : 1
-# Logic shifters                                       : 2
+# Logic shifters                                       : 3
+ 16-bit shifter arithmetic right                       : 1
  16-bit shifter logical left                           : 1
  16-bit shifter logical right                          : 1
 # Tristates                                            : 6
@@ -230,13 +233,14 @@ Macro Statistics
  28-bit up counter                                     : 1
 # Registers                                            : 4
  Flip-Flops                                            : 4
-# Multiplexers                                         : 41
+# Multiplexers                                         : 38
  1-bit 4-to-1 multiplexer                              : 1
- 16-bit 2-to-1 multiplexer                             : 37
- 16-bit 4-to-1 multiplexer                             : 1
+ 16-bit 2-to-1 multiplexer                             : 33
+ 16-bit 4-to-1 multiplexer                             : 2
  24-bit 22-to-1 multiplexer                            : 1
  6-bit 2-to-1 multiplexer                              : 1
-# Logic shifters                                       : 2
+# Logic shifters                                       : 3
+ 16-bit shifter arithmetic right                       : 1
  16-bit shifter logical left                           : 1
  16-bit shifter logical right                          : 1
 # FSMs                                                 : 1
@@ -284,11 +288,10 @@ Optimizing unit <alu_1> ...
 
 Mapping all equations...
 Building and optimizing final netlist ...
-Found area constraint ratio of 100 (+ 0) on block mojo_top_0, actual ratio is 6.
+Found area constraint ratio of 100 (+ 0) on block mojo_top_0, actual ratio is 7.
 FlipFlop M_state_q_FSM_FFd1 has been replicated 1 time(s)
-FlipFlop M_state_q_FSM_FFd2 has been replicated 1 time(s)
 FlipFlop M_state_q_FSM_FFd3 has been replicated 1 time(s)
-FlipFlop M_state_q_FSM_FFd4 has been replicated 1 time(s)
+FlipFlop M_state_q_FSM_FFd4 has been replicated 2 time(s)
 FlipFlop M_state_q_FSM_FFd5 has been replicated 1 time(s)
 
 Final Macro Processing ...
@@ -337,9 +340,9 @@ Timing Summary:
 ---------------
 Speed Grade: -2
 
-   Minimum period: 16.392ns (Maximum Frequency: 61.005MHz)
-   Minimum input arrival time before clock: 15.747ns
-   Maximum output required time after clock: 16.416ns
-   Maximum combinational path delay: 15.771ns
+   Minimum period: 16.672ns (Maximum Frequency: 59.981MHz)
+   Minimum input arrival time before clock: 15.914ns
+   Maximum output required time after clock: 16.965ns
+   Maximum combinational path delay: 16.207ns
 
 =========================================================================
