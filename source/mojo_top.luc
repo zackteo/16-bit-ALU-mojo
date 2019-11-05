@@ -108,7 +108,7 @@ module mojo_top (
           }  
           
         state.CMPEQ:
-          alu.alufn[5:0]=000010;
+          alu.alufn[5:0]=110011;
           alu.a[15:0]=0000000000000011;
           alu.b[15:0]=0000000000000011;
           if (alu.s==0000000000000001){
@@ -118,8 +118,104 @@ module mojo_top (
             state.d = state.FAIL;
           }   
           
-         
-      
+        state.CMPLT:
+          alufn[5:0]=110111;
+          alu.a=0000000000000011;
+          alu.b=0000000000000111;
+          if (alu.s==0000000000000001){
+            state.d = state.CMPLE;
+          }
+          else{
+            state.d = state.FAIL;
+          }
+
+        state.CMPLE:
+          alufn[5:0]=110101;
+          alu.a=0000000000000011;
+          alu.b=0000000000101011;
+          if (alu.s==0000000000000001){
+            state.d = state.OR;
+          }
+          else{
+            state.d = state.FAIL;
+          }
+
+        state.OR:
+          alufn[5:0]=011110;
+          alu.a=0000000011111111;
+          alu.b=0000111100001111;
+          if (alu.s==0000111111111111){
+            state.d = state.NOR;
+          }
+          else{
+            state.d = state.FAIL;
+          }
+
+        state.NOR:
+          alufn[5:0]=010001;
+          alu.a=0000000011111111;
+          alu.b=0000111100001111;
+          if (alu.s==1111000000000000){
+            state.d = state.XOR;
+          }
+          else{
+            state.d = state.FAIL;
+          }
+
+        state.XOR:
+          alufn[5:0]=010110;
+          alu.a=0000000011111111;
+          alu.b=0000111100001111;
+          if (alu.s==0000111111110000){
+            state.d = state.A;
+          }
+          else{
+            state.d = state.FAIL;
+          }
+
+        state.A:
+          alufn[5:0]=011010;
+          alu.a=0000000011111111;
+          alu.b=0000111100001111;
+          if (alu.s==0000000011111111){
+            state.d = state.B;
+          }
+          else{
+            state.d = state.FAIL;
+          }
+
+        state.B:
+          alufn[5:0]=011100;
+          alu.a=0000000011111111;
+          alu.b=0000111100001111;
+          if (alu.s==0000111100001111){
+            state.d = state.AND;
+          }
+          else{
+            state.d = state.FAIL;
+          }
+
+        state.AND:
+          alufn[5:0]=011000;
+          alu.a=0000000011111111;
+          alu.b=0000111100001111;
+          if (alu.s==0000000000001111){
+            state.d = state.NAND;
+          }
+          else{
+            state.d = state.FAIL;
+          }
+
+        state.NAND:
+          alufn[5:0]=010111;
+          alu.a=0000000011111111;
+          alu.b=0000111100001111;
+          if (alu.s==1111111111110000){
+            state.d = state.SHL;
+          }
+          else{
+            state.d = state.FAIL;
+          }
       }
     }
     case(state.q){
