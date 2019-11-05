@@ -28,17 +28,16 @@ module alu (
     //MUL
     mul.a[15:0] = a[15:0];
     mul.b[15:0] = b[15:0];
-    mul.alufn[5:0] = alufn[5:0];
     
     //BOOL
     bool.a[15:0] = a[15:0];
     bool.b[15:0] = b[15:0];
-    bool.alufn[5:0] = alufn[5:0];
+    bool.alufn[3:0] = alufn[3:0];
     
     //SHIFT
     shift.a[15:0] = a[15:0];
     shift.b[3:0] = b[3:0];
-    shift.alufn[5:0] = alufn[5:0];
+    shift.alufn[1:0] = alufn[1:0];
     
     //COMPARE
     compare.alufn[5:0] = alufn[5:0];

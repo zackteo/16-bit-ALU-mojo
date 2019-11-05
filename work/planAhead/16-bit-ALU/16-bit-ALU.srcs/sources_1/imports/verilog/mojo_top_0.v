@@ -143,11 +143,101 @@ module mojo_top_0 (
           end
         end
         CMPEQ_state: begin
-          M_alu_alufn[0+5-:6] = 4'ha;
+          M_alu_alufn[0+5-:6] = 17'h1adbb;
           M_alu_a[0+15-:16] = 4'hb;
           M_alu_b[0+15-:16] = 4'hb;
           if (M_alu_s == 1'h1) begin
             M_state_d = CMPLT_state;
+          end else begin
+            M_state_d = FAIL_state;
+          end
+        end
+        CMPLT_state: begin
+          M_alu_alufn[0+5-:6] = 17'h1ae1f;
+          M_alu_a = 4'hb;
+          M_alu_b = 7'h6f;
+          if (M_alu_s == 1'h1) begin
+            M_state_d = CMPLE_state;
+          end else begin
+            M_state_d = FAIL_state;
+          end
+        end
+        CMPLE_state: begin
+          M_alu_alufn[0+5-:6] = 17'h1ae15;
+          M_alu_a = 4'hb;
+          M_alu_b = 17'h18a93;
+          if (M_alu_s == 1'h1) begin
+            M_state_d = OR_state;
+          end else begin
+            M_state_d = FAIL_state;
+          end
+        end
+        OR_state: begin
+          M_alu_alufn[0+5-:6] = 14'h2b66;
+          M_alu_a = 24'ha98ac7;
+          M_alu_b = 37'h19de137b57;
+          if (M_alu_s == 37'h19debd01c7) begin
+            M_state_d = NOR_state;
+          end else begin
+            M_state_d = FAIL_state;
+          end
+        end
+        NOR_state: begin
+          M_alu_alufn[0+5-:6] = 14'h2711;
+          M_alu_a = 24'ha98ac7;
+          M_alu_b = 37'h19de137b57;
+          if (M_alu_s == 50'h3f272d8587000) begin
+            M_state_d = XOR_state;
+          end else begin
+            M_state_d = FAIL_state;
+          end
+        end
+        XOR_state: begin
+          M_alu_alufn[0+5-:6] = 14'h277e;
+          M_alu_a = 24'ha98ac7;
+          M_alu_b = 37'h19de137b57;
+          if (M_alu_s == 37'h19debcfd70) begin
+            M_state_d = A_state;
+          end else begin
+            M_state_d = FAIL_state;
+          end
+        end
+        A_state: begin
+          M_alu_alufn[0+5-:6] = 14'h2b02;
+          M_alu_a = 24'ha98ac7;
+          M_alu_b = 37'h19de137b57;
+          if (M_alu_s == 24'ha98ac7) begin
+            M_state_d = B_state;
+          end else begin
+            M_state_d = FAIL_state;
+          end
+        end
+        B_state: begin
+          M_alu_alufn[0+5-:6] = 14'h2b5c;
+          M_alu_a = 24'ha98ac7;
+          M_alu_b = 37'h19de137b57;
+          if (M_alu_s == 37'h19de137b57) begin
+            M_state_d = AND_state;
+          end else begin
+            M_state_d = FAIL_state;
+          end
+        end
+        AND_state: begin
+          M_alu_alufn[0+5-:6] = 14'h2af8;
+          M_alu_a = 24'ha98ac7;
+          M_alu_b = 37'h19de137b57;
+          if (M_alu_s == 11'h457) begin
+            M_state_d = NAND_state;
+          end else begin
+            M_state_d = FAIL_state;
+          end
+        end
+        NAND_state: begin
+          M_alu_alufn[0+5-:6] = 14'h277f;
+          M_alu_a = 24'ha98ac7;
+          M_alu_b = 37'h19de137b57;
+          if (M_alu_s == 50'h3f28cb7156d70) begin
+            M_state_d = SHL_state;
           end else begin
             M_state_d = FAIL_state;
           end
@@ -196,13 +286,13 @@ module mojo_top_0 (
   end
   
   always @(posedge clk) begin
-    M_counter_q <= M_counter_d;
-    
     if (rst == 1'b1) begin
       M_state_q <= 1'h0;
     end else begin
       M_state_q <= M_state_d;
     end
+    
+    M_counter_q <= M_counter_d;
   end
   
 endmodule

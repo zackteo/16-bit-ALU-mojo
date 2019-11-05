@@ -1,7 +1,7 @@
 module boolean_16bit (
     input a[16],
     input b[16],
-    input alufn[6],
+    input alufn[4],
     output s[16]
   ) {
 
@@ -10,31 +10,31 @@ module boolean_16bit (
     s[15:0] = 0;
   
     // AND function
-    if (alufn[3:0] == 1000){
+    if (alufn[3:0] == b1000){
       s[15:0] = a[15:0] & b[15:0];
     }
     // NAND function
-    if (alufn[3:0] == 0111){
+    if (alufn[3:0] == b0111){
       s[15:0] = ~(a[15:0] & b[15:0]);
     }
     // OR function
-    if (alufn[3:0] == 1110){
+    if (alufn[3:0] == b1110){
       s[15:0] = a[15:0] | b[15:0];
     }
     // NOR function
-    if (alufn[3:0] == 0001){
+    if (alufn[3:0] == b0001){
       s[15:0] = ~(a[15:0] | b[15:0]);
     }  
     // XOR function
-    if (alufn[3:0] == 0110){
+    if (alufn[3:0] == b0110){
       s[15:0] = a[15:0] ^ b[15:0];
     }
     // true if a function
-    if (alufn[3:0] == 1010){
+    if (alufn[3:0] == b1010){
       s[15:0] = a[15:0];
     }
     // true if b function
-    if (alufn[3:0] == 0101){
+    if (alufn[3:0] == b0101){
       s[15:0] = b[15:0];
     }
   }

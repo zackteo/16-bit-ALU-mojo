@@ -8,15 +8,15 @@ module compare16bit (
     ) {
  always {
   //initialise cmp[15:1] to 0 
-    s[15:1] = 0;
+    s[15:0] = 0;
     
-    if (alufn[3:0] == 0101){
+    if (alufn[2:1] == b10){
     s[0] = n ^ v;}
       
-    if (alufn[3:0] == 0011){
+    if (alufn[2:1] == b01){
     s[0] = z;}
       
-    if (alufn[3:0] == 0111){
+    if (alufn[2:1] == b11){
     s[0] = (n^v) | z;}
   }
 }  

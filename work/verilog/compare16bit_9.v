@@ -15,14 +15,14 @@ module compare16bit_9 (
   
   
   always @* begin
-    s[1+14-:15] = 1'h0;
-    if (alufn[0+3-:4] == 7'h65) begin
+    s[0+15-:16] = 1'h0;
+    if (alufn[1+1-:2] == 2'h2) begin
       s[0+0-:1] = n ^ v;
     end
-    if (alufn[0+3-:4] == 4'hb) begin
+    if (alufn[1+1-:2] == 2'h1) begin
       s[0+0-:1] = z;
     end
-    if (alufn[0+3-:4] == 7'h6f) begin
+    if (alufn[1+1-:2] == 2'h3) begin
       s[0+0-:1] = (n ^ v) | z;
     end
   end

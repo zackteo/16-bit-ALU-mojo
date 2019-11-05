@@ -42,7 +42,7 @@ module alu_1 (
   wire [16-1:0] M_bool_s;
   reg [16-1:0] M_bool_a;
   reg [16-1:0] M_bool_b;
-  reg [6-1:0] M_bool_alufn;
+  reg [4-1:0] M_bool_alufn;
   boolean_16bit_7 bool (
     .a(M_bool_a),
     .b(M_bool_b),
@@ -53,7 +53,7 @@ module alu_1 (
   wire [16-1:0] M_shift_s;
   reg [16-1:0] M_shift_a;
   reg [4-1:0] M_shift_b;
-  reg [6-1:0] M_shift_alufn;
+  reg [2-1:0] M_shift_alufn;
   shifter_16bit_8 shift (
     .a(M_shift_a),
     .b(M_shift_b),
@@ -77,11 +77,9 @@ module alu_1 (
   wire [16-1:0] M_mul_s;
   reg [16-1:0] M_mul_a;
   reg [16-1:0] M_mul_b;
-  reg [6-1:0] M_mul_alufn;
   multiply_16bit_10 mul (
     .a(M_mul_a),
     .b(M_mul_b),
-    .alufn(M_mul_alufn),
     .s(M_mul_s)
   );
   
@@ -95,13 +93,12 @@ module alu_1 (
     M_adder2_s[0+15-:16] = M_adder1_s[0+15-:16];
     M_mul_a[0+15-:16] = a[0+15-:16];
     M_mul_b[0+15-:16] = b[0+15-:16];
-    M_mul_alufn[0+5-:6] = alufn[0+5-:6];
     M_bool_a[0+15-:16] = a[0+15-:16];
     M_bool_b[0+15-:16] = b[0+15-:16];
-    M_bool_alufn[0+5-:6] = alufn[0+5-:6];
+    M_bool_alufn[0+3-:4] = alufn[0+3-:4];
     M_shift_a[0+15-:16] = a[0+15-:16];
     M_shift_b[0+3-:4] = b[0+3-:4];
-    M_shift_alufn[0+5-:6] = alufn[0+5-:6];
+    M_shift_alufn[0+1-:2] = alufn[0+1-:2];
     M_compare_alufn[0+5-:6] = alufn[0+5-:6];
     M_compare_z[0+0-:1] = M_adder2_z[0+0-:1];
     M_compare_v[0+0-:1] = M_adder2_v[0+0-:1];

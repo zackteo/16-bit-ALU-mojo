@@ -7,7 +7,7 @@
 module boolean_16bit_7 (
     input [15:0] a,
     input [15:0] b,
-    input [5:0] alufn,
+    input [3:0] alufn,
     output reg [15:0] s
   );
   
@@ -15,25 +15,25 @@ module boolean_16bit_7 (
   
   always @* begin
     s[0+15-:16] = 1'h0;
-    if (alufn[0+3-:4] == 10'h3e8) begin
+    if (alufn[0+3-:4] == 4'h8) begin
       s[0+15-:16] = a[0+15-:16] & b[0+15-:16];
     end
-    if (alufn[0+3-:4] == 7'h6f) begin
+    if (alufn[0+3-:4] == 4'h7) begin
       s[0+15-:16] = ~(a[0+15-:16] & b[0+15-:16]);
     end
-    if (alufn[0+3-:4] == 11'h456) begin
+    if (alufn[0+3-:4] == 4'he) begin
       s[0+15-:16] = a[0+15-:16] | b[0+15-:16];
     end
-    if (alufn[0+3-:4] == 1'h1) begin
+    if (alufn[0+3-:4] == 4'h1) begin
       s[0+15-:16] = ~(a[0+15-:16] | b[0+15-:16]);
     end
-    if (alufn[0+3-:4] == 7'h6e) begin
+    if (alufn[0+3-:4] == 4'h6) begin
       s[0+15-:16] = a[0+15-:16] ^ b[0+15-:16];
     end
-    if (alufn[0+3-:4] == 10'h3f2) begin
+    if (alufn[0+3-:4] == 4'ha) begin
       s[0+15-:16] = a[0+15-:16];
     end
-    if (alufn[0+3-:4] == 7'h65) begin
+    if (alufn[0+3-:4] == 4'h5) begin
       s[0+15-:16] = b[0+15-:16];
     end
   end

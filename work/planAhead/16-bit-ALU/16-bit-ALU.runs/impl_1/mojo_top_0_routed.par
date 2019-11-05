@@ -1,7 +1,7 @@
 Release 14.7 par P.20131013 (nt64)
 Copyright (c) 1995-2013 Xilinx, Inc.  All rights reserved.
 
-LAPTOP-3GQDLOMS::  Tue Nov 05 15:24:46 2019
+LAPTOP-3GQDLOMS::  Tue Nov 05 18:40:46 2019
 
 par -intstyle pa -w -mt on mojo_top_0.ncd mojo_top_0_routed.ncd 
 
@@ -26,11 +26,11 @@ Slice Logic Utilization:
     Number used as Latches:                      0
     Number used as Latch-thrus:                  0
     Number used as AND/OR logics:                0
-  Number of Slice LUTs:                         91 out of   5,720    1%
-    Number used as logic:                       88 out of   5,720    1%
-      Number using O6 output only:              47
+  Number of Slice LUTs:                        151 out of   5,720    2%
+    Number used as logic:                      148 out of   5,720    2%
+      Number using O6 output only:             114
       Number using O5 output only:              24
-      Number using O5 and O6:                   17
+      Number using O5 and O6:                   10
       Number used as ROM:                        0
     Number used as Memory:                       0 out of   1,440    0%
     Number used exclusively as route-thrus:      3
@@ -39,12 +39,12 @@ Slice Logic Utilization:
       Number with other load:                    0
 
 Slice Logic Distribution:
-  Number of occupied Slices:                    42 out of   1,430    2%
+  Number of occupied Slices:                    75 out of   1,430    5%
   Number of MUXCYs used:                        44 out of   2,860    1%
-  Number of LUT Flip Flop pairs used:           93
-    Number with an unused Flip Flop:            63 out of      93   67%
-    Number with an unused LUT:                   2 out of      93    2%
-    Number of fully used LUT-FF pairs:          28 out of      93   30%
+  Number of LUT Flip Flop pairs used:          153
+    Number with an unused Flip Flop:           123 out of     153   80%
+    Number with an unused LUT:                   2 out of     153    1%
+    Number of fully used LUT-FF pairs:          28 out of     153   18%
     Number of slice register sites lost
       to control set restrictions:               0 out of  11,440    0%
 
@@ -74,7 +74,7 @@ Specific Feature Utilization:
   Number of BUFHs:                               0 out of     128    0%
   Number of BUFPLLs:                             0 out of       8    0%
   Number of BUFPLL_MCBs:                         0 out of       4    0%
-  Number of DSP48A1s:                            0 out of      16    0%
+  Number of DSP48A1s:                            1 out of      16    6%
   Number of ICAPs:                               0 out of       1    0%
   Number of MCBs:                                0 out of       2    0%
   Number of PCILOGICSEs:                         0 out of       2    0%
@@ -88,6 +88,13 @@ Overall effort level (-ol):   Standard
 Router effort level (-rl):    High 
 
 PAR will use up to 2 processors
+WARNING:Par:288 - The signal avr_tx_IBUF has no load.  PAR will not attempt to route this signal.
+WARNING:Par:288 - The signal io_dip(20)_IBUF has no load.  PAR will not attempt to route this signal.
+WARNING:Par:288 - The signal io_dip(21)_IBUF has no load.  PAR will not attempt to route this signal.
+WARNING:Par:288 - The signal io_dip(22)_IBUF has no load.  PAR will not attempt to route this signal.
+WARNING:Par:288 - The signal cclk_IBUF has no load.  PAR will not attempt to route this signal.
+WARNING:Par:288 - The signal io_dip(23)_IBUF has no load.  PAR will not attempt to route this signal.
+WARNING:Par:288 - The signal io_dip(16)_IBUF has no load.  PAR will not attempt to route this signal.
 WARNING:Par:288 - The signal io_dip(17)_IBUF has no load.  PAR will not attempt to route this signal.
 WARNING:Par:288 - The signal io_dip(18)_IBUF has no load.  PAR will not attempt to route this signal.
 WARNING:Par:288 - The signal io_dip(19)_IBUF has no load.  PAR will not attempt to route this signal.
@@ -100,23 +107,16 @@ WARNING:Par:288 - The signal io_button(3)_IBUF has no load.  PAR will not attemp
 WARNING:Par:288 - The signal io_button(4)_IBUF has no load.  PAR will not attempt to route this signal.
 WARNING:Par:288 - The signal spi_mosi_IBUF has no load.  PAR will not attempt to route this signal.
 WARNING:Par:288 - The signal spi_ss_IBUF has no load.  PAR will not attempt to route this signal.
-WARNING:Par:288 - The signal avr_tx_IBUF has no load.  PAR will not attempt to route this signal.
-WARNING:Par:288 - The signal io_dip(20)_IBUF has no load.  PAR will not attempt to route this signal.
-WARNING:Par:288 - The signal io_dip(21)_IBUF has no load.  PAR will not attempt to route this signal.
-WARNING:Par:288 - The signal io_dip(22)_IBUF has no load.  PAR will not attempt to route this signal.
-WARNING:Par:288 - The signal cclk_IBUF has no load.  PAR will not attempt to route this signal.
-WARNING:Par:288 - The signal io_dip(23)_IBUF has no load.  PAR will not attempt to route this signal.
-WARNING:Par:288 - The signal io_dip(16)_IBUF has no load.  PAR will not attempt to route this signal.
 Starting Multi-threaded Router
 
 
-Phase  1  : 420 unrouted;      REAL time: 3 secs 
+Phase  1  : 868 unrouted;      REAL time: 3 secs 
 
-Phase  2  : 367 unrouted;      REAL time: 3 secs 
+Phase  2  : 727 unrouted;      REAL time: 4 secs 
 
-Phase  3  : 249 unrouted;      REAL time: 4 secs 
+Phase  3  : 483 unrouted;      REAL time: 4 secs 
 
-Phase  4  : 249 unrouted; (Setup:0, Hold:0, Component Switching Limit:0)     REAL time: 4 secs 
+Phase  4  : 483 unrouted; (Setup:0, Hold:0, Component Switching Limit:0)     REAL time: 4 secs 
 
 Updating file: mojo_top_0_routed.ncd with current fully routed design.
 
@@ -143,7 +143,7 @@ Generating Clock Report
 +---------------------+--------------+------+------+------------+-------------+
 |        Clock Net    |   Resource   |Locked|Fanout|Net Skew(ns)|Max Delay(ns)|
 +---------------------+--------------+------+------+------------+-------------+
-|           clk_BUFGP | BUFGMUX_X2Y11| No   |    9 |  0.032     |  1.432      |
+|           clk_BUFGP | BUFGMUX_X2Y11| No   |    9 |  0.016     |  1.436      |
 +---------------------+--------------+------+------+------------+-------------+
 
 * Net Skew is the difference between the minimum and maximum routing
@@ -163,8 +163,8 @@ Asterisk (*) preceding a constraint indicates it was not met.
   Constraint                                |    Check    | Worst Case |  Best Case | Timing |   Timing   
                                             |             |    Slack   | Achievable | Errors |    Score   
 ----------------------------------------------------------------------------------------------------------
-  TS_clk = PERIOD TIMEGRP "clk" 50 MHz HIGH | SETUP       |    16.801ns|     3.199ns|       0|           0
-   50%                                      | HOLD        |     0.448ns|            |       0|           0
+  TS_clk = PERIOD TIMEGRP "clk" 50 MHz HIGH | SETUP       |    16.957ns|     3.043ns|       0|           0
+   50%                                      | HOLD        |     0.420ns|            |       0|           0
 ----------------------------------------------------------------------------------------------------------
 
 
@@ -180,7 +180,7 @@ WARNING:Par:283 - There are 19 loadless signals in this design. This design will
 Total REAL time to PAR completion: 5 secs 
 Total CPU time to PAR completion (all processors): 5 secs 
 
-Peak Memory Usage:  4520 MB
+Peak Memory Usage:  4522 MB
 
 Placer: Placement generated during map.
 Routing: Completed - No errors found.
