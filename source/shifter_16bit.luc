@@ -10,23 +10,23 @@ module shifter_16bit (
     s[15:0] = 0;
     
     //alufn signal 11 is for SRA
-    if(alufn[1]==1 && alufn[0]==1)
+    if(alufn[1:0] == b11)
     {
         s[15:0] = a[15:0] >>> b[3:0];
     }
     
-    if(alufn[0]==1 && alufn[1]==0) //SHR if 01
+    if(alufn[1:0] == b01) //SHR if 01
     {
         s[15:0] = a[15:0] >> b[3:0];
     }
         
-    if(alufn[1]==1 && alufn[0]==0) //SLA if 10
+    if(alufn[1:0] == b10) //SLA if 10
     {
         s[15:0] = a[15:0] <<< b[3:0];
     }
     
     //alufn signal 00 is for SHL
-    if(alufn[1]==0 && alufn[0]==0) //00 = shl
+    if(alufn[1:0] == b00) //00 = shl
     {
         s[15:0] = a[15:0] << b[3:0];
     }
