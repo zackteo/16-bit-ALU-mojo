@@ -7,7 +7,7 @@ module compare16bit (
   output s[16]
     ) {
  always {
-  //initialise cmp[15:1] to 0 
+  //initialise cmp[15:0] to 0 
     s[15:0] = 0;
     
     if (alufn[2:1] == b10){

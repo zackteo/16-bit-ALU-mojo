@@ -1,6 +1,6 @@
 module adder_16bit_2 (
-    input a[16],
-    input b[16],
+    input a,
+    input b,
     input alufn[1],
     input s[16],
     output z,  // zero
@@ -10,9 +10,9 @@ module adder_16bit_2 (
 
   always {
     // expression given for v
-    v = (a[15] | (b[15]^alufn[0]) | ~(s[15])) & (~(a[15]) | ~(b[15]^alufn[0]) | s[15]);
+    v = (a & (b^alufn[0]) & ~(s[15])) | (~(a) & ~(b^alufn[0]) & s[15]);
     
-    // if negative, 16-bit will be 1
+    // if negative, 16th-bit will be 1
     n = s[15];
     
     // NOR all the bits together

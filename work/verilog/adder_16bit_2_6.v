@@ -5,8 +5,9 @@
 */
 
 module adder_16bit_2_6 (
-    input [15:0] a,
-    input [15:0] b,
+    input a,
+    input b,
+    input [0:0] alufn,
     input [15:0] s,
     output reg z,
     output reg v,
@@ -16,7 +17,7 @@ module adder_16bit_2_6 (
   
   
   always @* begin
-    v = (a[15+0-:1] | b[15+0-:1] | ~(s[15+0-:1])) & (~(a[15+0-:1]) | ~(b[15+0-:1]) | s[15+0-:1]);
+    v = (a & (b ^ alufn[0+0-:1]) & ~(s[15+0-:1])) | (~(a) & ~(b ^ alufn[0+0-:1]) & s[15+0-:1]);
     n = s[15+0-:1];
     z = (~|s[0+15-:16]);
   end
