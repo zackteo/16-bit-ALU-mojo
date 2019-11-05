@@ -4,10 +4,10 @@
    This is a temporary file and any changes made to it will be destroyed.
 */
 
-module adder_16bit_1_5 (
+module multiply_16bit_10 (
     input [15:0] a,
     input [15:0] b,
-    input [0:0] alufn,
+    input [5:0] alufn,
     output reg [15:0] s
   );
   
@@ -15,11 +15,8 @@ module adder_16bit_1_5 (
   
   always @* begin
     s[0+15-:16] = 1'h0;
-    if (alufn[0+0-:1] == 1'h0) begin
-      s[0+15-:16] = a[0+15-:16] + b[0+15-:16];
-    end
-    if (alufn[0+0-:1] == 1'h1) begin
-      s[0+15-:16] = a[0+15-:16] - b[0+15-:16];
+    if (alufn[0+1-:2] == 4'ha) begin
+      s[0+15-:16] = a[0+15-:16] * b[0+15-:16];
     end
   end
 endmodule

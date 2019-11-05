@@ -59,8 +59,21 @@ NET "io_led[22]" IOSTANDARD = LVTTL;
 NET "io_led[23]" LOC = P26;
 NET "io_led[23]" IOSTANDARD = LVTTL;
 
-
-
+NET "io_button[0]" LOC = P137;
+NET "io_button[0]" IOSTANDARD = LVTTL;
+NET "io_button[0]" PULLDOWN;
+NET "io_button[1]" LOC = P140;
+NET "io_button[1]" IOSTANDARD = LVTTL;
+NET "io_button[1]" PULLDOWN;
+NET "io_button[2]" LOC = P139;
+NET "io_button[2]" IOSTANDARD = LVTTL;
+NET "io_button[2]" PULLDOWN;
+NET "io_button[3]" LOC = P142;
+NET "io_button[3]" IOSTANDARD = LVTTL;
+NET "io_button[3]" PULLDOWN;
+NET "io_button[4]" LOC = P138;
+NET "io_button[4]" IOSTANDARD = LVTTL;
+NET "io_button[4]" PULLDOWN;
 
 NET "io_dip[23]" LOC = P57;
 NET "io_dip[23]" IOSTANDARD = LVTTL;
@@ -156,56 +169,55 @@ NET "alufn[5]" LOC = P27;
 NET "alufn[5]" IOSTANDARD = LVTTL;
 NET "alufn[5]" PULLDOWN;
 
-NET "b[0]" LOC = P124;
+NET "b[0]" LOC = P123;
 NET "b[0]" IOSTANDARD = LVTTL;
 NET "b[0]" PULLDOWN;
-NET "b[1]" LOC = P127;
+NET "b[1]" LOC = P124;
 NET "b[1]" IOSTANDARD = LVTTL;
 NET "b[1]" PULLDOWN;
-NET "b[2]" LOC = P132;
+NET "b[2]" LOC = P126;
 NET "b[2]" IOSTANDARD = LVTTL;
 NET "b[2]" PULLDOWN;
-NET "b[3]" LOC = P134;
+NET "b[3]" LOC = P127;
 NET "b[3]" IOSTANDARD = LVTTL;
 NET "b[3]" PULLDOWN;
-NET "b[4]" LOC = P138;
+NET "b[4]" LOC = P131;
 NET "b[4]" IOSTANDARD = LVTTL;
 NET "b[4]" PULLDOWN;
-NET "b[5]" LOC = P140;
+NET "b[5]" LOC = P132;
 NET "b[5]" IOSTANDARD = LVTTL;
 NET "b[5]" PULLDOWN;
-NET "b[6]" LOC = P142;
+NET "b[6]" LOC = P133;
 NET "b[6]" IOSTANDARD = LVTTL;
 NET "b[6]" PULLDOWN;
-NET "b[7]" LOC = P144;
+NET "b[7]" LOC = P134;
 NET "b[7]" IOSTANDARD = LVTTL;
 NET "b[7]" PULLDOWN;
 
-NET "b[8]" LOC = P123;
+NET "b[8]" LOC = P143;
 NET "b[8]" IOSTANDARD = LVTTL;
 NET "b[8]" PULLDOWN;
-NET "b[9]" LOC = P126;
+NET "b[9]" LOC = P144;
 NET "b[9]" IOSTANDARD = LVTTL;
 NET "b[9]" PULLDOWN;
-NET "b[10]" LOC = P131;
+NET "b[10]" LOC = P1;
 NET "b[10]" IOSTANDARD = LVTTL;
 NET "b[10]" PULLDOWN;
-NET "b[11]" LOC = P133;
+NET "b[11]" LOC = P2;
 NET "b[11]" IOSTANDARD = LVTTL;
 NET "b[11]" PULLDOWN;
-NET "b[12]" LOC = P137;
+NET "b[12]" LOC = P5;
 NET "b[12]" IOSTANDARD = LVTTL;
 NET "b[12]" PULLDOWN;
-NET "b[13]" LOC = P139;
+NET "b[13]" LOC = P6;
 NET "b[13]" IOSTANDARD = LVTTL;
 NET "b[13]" PULLDOWN;
-NET "b[14]" LOC = P141;
+NET "b[14]" LOC = P7;
 NET "b[14]" IOSTANDARD = LVTTL;
 NET "b[14]" PULLDOWN;
-NET "b[15]" LOC = P143;
+NET "b[15]" LOC = P8;
 NET "b[15]" IOSTANDARD = LVTTL;
 NET "b[15]" PULLDOWN;
-
 
 ####################################################################################
 # Constraints from file : 'mojo.ucf'
@@ -213,6 +225,8 @@ NET "b[15]" PULLDOWN;
 
 CONFIG VCCAUX  = 3.3;
 
+NET "clk" TNM_NET = "clk";
+TIMESPEC TS_clk = PERIOD "clk" 50 MHz HIGH 50 %;
 
 NET "clk" LOC = P56;
 NET "clk" IOSTANDARD = LVTTL;

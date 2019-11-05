@@ -8,31 +8,40 @@ Target Device  : xc6slx9
 Target Package : tqg144
 Target Speed   : -2
 Mapper Version : spartan6 -- $Revision: 1.55 $
-Mapped Date    : Mon Nov 04 18:27:33 2019
+Mapped Date    : Tue Nov 05 15:24:37 2019
 
 Design Summary
 --------------
 Number of errors:      0
 Number of warnings:    6
 Slice Logic Utilization:
-  Number of Slice Registers:                     0 out of  11,440    0%
-  Number of Slice LUTs:                         33 out of   5,720    1%
-    Number used as logic:                       33 out of   5,720    1%
-      Number using O6 output only:              33
-      Number using O5 output only:               0
-      Number using O5 and O6:                    0
+  Number of Slice Registers:                    31 out of  11,440    1%
+    Number used as Flip Flops:                  31
+    Number used as Latches:                      0
+    Number used as Latch-thrus:                  0
+    Number used as AND/OR logics:                0
+  Number of Slice LUTs:                         91 out of   5,720    1%
+    Number used as logic:                       88 out of   5,720    1%
+      Number using O6 output only:              47
+      Number using O5 output only:              24
+      Number using O5 and O6:                   17
       Number used as ROM:                        0
     Number used as Memory:                       0 out of   1,440    0%
+    Number used exclusively as route-thrus:      3
+      Number with same-slice register load:      1
+      Number with same-slice carry load:         2
+      Number with other load:                    0
 
 Slice Logic Distribution:
-  Number of occupied Slices:                    14 out of   1,430    1%
-  Number of MUXCYs used:                        16 out of   2,860    1%
-  Number of LUT Flip Flop pairs used:           33
-    Number with an unused Flip Flop:            33 out of      33  100%
-    Number with an unused LUT:                   0 out of      33    0%
-    Number of fully used LUT-FF pairs:           0 out of      33    0%
+  Number of occupied Slices:                    42 out of   1,430    2%
+  Number of MUXCYs used:                        44 out of   2,860    1%
+  Number of LUT Flip Flop pairs used:           93
+    Number with an unused Flip Flop:            63 out of      93   67%
+    Number with an unused LUT:                   2 out of      93    2%
+    Number of fully used LUT-FF pairs:          28 out of      93   30%
+    Number of unique control sets:               3
     Number of slice register sites lost
-      to control set restrictions:               0 out of  11,440    0%
+      to control set restrictions:              17 out of  11,440    1%
 
   A LUT Flip Flop pair for this architecture represents one LUT paired with
   one Flip Flop within a slice.  A control set is a unique combination of
@@ -41,15 +50,17 @@ Slice Logic Distribution:
   over-mapped for a non-slice resource or if Placement fails.
 
 IO Utilization:
-  Number of bonded IOBs:                        86 out of     102   84%
-    Number of LOCed IOBs:                       78 out of      86   90%
+  Number of bonded IOBs:                        91 out of     102   89%
+    Number of LOCed IOBs:                       83 out of      91   91%
 
 Specific Feature Utilization:
   Number of RAMB16BWERs:                         0 out of      32    0%
   Number of RAMB8BWERs:                          0 out of      64    0%
   Number of BUFIO2/BUFIO2_2CLKs:                 0 out of      32    0%
   Number of BUFIO2FB/BUFIO2FB_2CLKs:             0 out of      32    0%
-  Number of BUFG/BUFGMUXs:                       0 out of      16    0%
+  Number of BUFG/BUFGMUXs:                       1 out of      16    6%
+    Number used as BUFGs:                        1
+    Number used as BUFGMUX:                      0
   Number of DCM/DCM_CLKGENs:                     0 out of       4    0%
   Number of ILOGIC2/ISERDES2s:                   0 out of     200    0%
   Number of IODELAY2/IODRP2/IODRP2_MCBs:         0 out of     200    0%
@@ -67,11 +78,11 @@ Specific Feature Utilization:
   Number of STARTUPs:                            0 out of       1    0%
   Number of SUSPEND_SYNCs:                       0 out of       1    0%
 
-Average Fanout of Non-Clock Nets:                2.04
+Average Fanout of Non-Clock Nets:                2.10
 
 Peak Memory Usage:  4548 MB
-Total REAL time to MAP completion:  4 secs 
-Total CPU time to MAP completion (all processors):   4 secs 
+Total REAL time to MAP completion:  7 secs 
+Total CPU time to MAP completion (all processors):   6 secs 
 
 Table of Contents
 -----------------
@@ -112,14 +123,14 @@ Section 3 - Informational
 INFO:Map:284 - Map is running with the multi-threading option on. Map currently
    supports the use of up to 2 processors. Based on the the user options and
    machine load, Map will use 2 processors during this run.
-INFO:LIT:243 - Logical network io_button(4) has no load.
-INFO:LIT:395 - The above info message is repeated 20 more times for the
+INFO:LIT:243 - Logical network avr_rx_busy_IBUF has no load.
+INFO:LIT:395 - The above info message is repeated 18 more times for the
    following (max. 5 shown):
-   io_button(3),
-   io_button(2),
-   io_button(1),
-   io_button(0),
-   rst_n_IBUF
+   io_dip(23)_IBUF,
+   io_dip(22)_IBUF,
+   io_dip(21)_IBUF,
+   io_dip(20)_IBUF,
+   io_dip(19)_IBUF
    To see the details of these info messages, please use the -detail switch.
 INFO:MapLib:562 - No environment variables are currently set.
 INFO:LIT:244 - All of the single ended outputs in this design are using slew
@@ -131,16 +142,16 @@ INFO:Pack:1720 - Initializing voltage to 1.140 Volts. (default - Range: 1.140 to
    1.260 Volts)
 INFO:Map:215 - The Interim Design Summary has been generated in the MAP Report
    (.mrp).
-INFO:Place:834 - Only a subset of IOs are locked. Out of 86 IOs, 78 are locked
+INFO:Place:834 - Only a subset of IOs are locked. Out of 91 IOs, 83 are locked
    and 8 are not locked. If you would like to print the names of these IOs,
    please set the environment variable XIL_PAR_DESIGN_CHECK_VERBOSE to 1. 
 INFO:Pack:1650 - Map created a placed design.
 
 Section 4 - Removed Logic Summary
 ---------------------------------
-  13 block(s) removed
-   1 block(s) optimized away
-   7 signal(s) removed
+  12 block(s) removed
+   3 block(s) optimized away
+   6 signal(s) removed
 
 Section 5 - Removed Logic
 -------------------------
@@ -152,8 +163,6 @@ The trimmed logic reported below is either:
 
 The signal "spi_miso" is unused and has been removed.
  Unused block "spi_miso_OBUFT" (TRI) removed.
-  The signal "io_led<16>_inv" is unused and has been removed.
-   Unused block "XST_VCC" (ONE) removed.
 The signal "spi_channel[3]" is unused and has been removed.
  Unused block "spi_channel_3_OBUFT" (TRI) removed.
 The signal "spi_channel[2]" is unused and has been removed.
@@ -174,6 +183,11 @@ Unused block "spi_miso" (PAD) removed.
 Optimized Block(s):
 TYPE 		BLOCK
 GND 		XST_GND
+VCC 		XST_VCC
+GND 		reset_cond/XST_GND
+
+To enable printing of redundant blocks removed and signals merged, set the
+detailed map report option and rerun map.
 
 Section 6 - IOB Properties
 --------------------------
@@ -208,6 +222,11 @@ Section 6 - IOB Properties
 | b[15]                              | IOB              | INPUT     | LVTTL                |       |          |      |              | PULLDOWN |          |
 | cclk                               | IOB              | INPUT     | LVTTL                |       |          |      |              |          |          |
 | clk                                | IOB              | INPUT     | LVTTL                |       |          |      |              |          |          |
+| io_button(0)                       | IOB              | INPUT     | LVTTL                |       |          |      |              | PULLDOWN |          |
+| io_button(1)                       | IOB              | INPUT     | LVTTL                |       |          |      |              | PULLDOWN |          |
+| io_button(2)                       | IOB              | INPUT     | LVTTL                |       |          |      |              | PULLDOWN |          |
+| io_button(3)                       | IOB              | INPUT     | LVTTL                |       |          |      |              | PULLDOWN |          |
+| io_button(4)                       | IOB              | INPUT     | LVTTL                |       |          |      |              | PULLDOWN |          |
 | io_dip(16)                         | IOB              | INPUT     | LVTTL                |       |          |      |              | PULLDOWN |          |
 | io_dip(17)                         | IOB              | INPUT     | LVTTL                |       |          |      |              | PULLDOWN |          |
 | io_dip(18)                         | IOB              | INPUT     | LVTTL                |       |          |      |              | PULLDOWN |          |

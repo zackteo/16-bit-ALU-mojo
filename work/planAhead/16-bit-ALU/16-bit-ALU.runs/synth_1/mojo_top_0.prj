@@ -1,5 +1,6 @@
 verilog work "C:/Users/Matthew/Documents/GitHub/16-bit-ALU-mojo/work/planAhead/16-bit-ALU/16-bit-ALU.srcs/sources_1/imports/verilog/shifter_16bit_8.v"
-verilog work "C:/Users/Matthew/Documents/GitHub/16-bit-ALU-mojo/work/planAhead/16-bit-ALU/16-bit-ALU.srcs/sources_1/imports/verilog/pipeline_10.v"
+verilog work "C:/Users/Matthew/Documents/GitHub/16-bit-ALU-mojo/work/planAhead/16-bit-ALU/16-bit-ALU.srcs/sources_1/imports/verilog/pipeline_11.v"
+verilog work "C:/Users/Matthew/Documents/GitHub/16-bit-ALU-mojo/work/planAhead/16-bit-ALU/16-bit-ALU.srcs/sources_1/imports/verilog/multiply_16bit_10.v"
 verilog work "C:/Users/Matthew/Documents/GitHub/16-bit-ALU-mojo/work/planAhead/16-bit-ALU/16-bit-ALU.srcs/sources_1/imports/verilog/compare16bit_9.v"
 verilog work "C:/Users/Matthew/Documents/GitHub/16-bit-ALU-mojo/work/planAhead/16-bit-ALU/16-bit-ALU.srcs/sources_1/imports/verilog/boolean_16bit_7.v"
 verilog work "C:/Users/Matthew/Documents/GitHub/16-bit-ALU-mojo/work/planAhead/16-bit-ALU/16-bit-ALU.srcs/sources_1/imports/verilog/adder_16bit_2_6.v"

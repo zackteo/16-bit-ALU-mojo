@@ -8,10 +8,7 @@ module alu_1 (
     input [15:0] a,
     input [15:0] b,
     input [5:0] alufn,
-    output reg [15:0] s,
-    output reg [0:0] v,
-    output reg [0:0] n,
-    output reg [0:0] z
+    output reg [15:0] s
   );
   
   
@@ -77,17 +74,28 @@ module alu_1 (
     .s(M_compare_s)
   );
   
+  wire [16-1:0] M_mul_s;
+  reg [16-1:0] M_mul_a;
+  reg [16-1:0] M_mul_b;
+  reg [6-1:0] M_mul_alufn;
+  multiply_16bit_10 mul (
+    .a(M_mul_a),
+    .b(M_mul_b),
+    .alufn(M_mul_alufn),
+    .s(M_mul_s)
+  );
+  
   always @* begin
     s[0+15-:16] = 1'h0;
-    v[0+0-:1] = 1'h0;
-    z[0+0-:1] = 1'h0;
-    n[0+0-:1] = 1'h0;
     M_adder1_a[0+15-:16] = a[0+15-:16];
     M_adder1_b[0+15-:16] = b[0+15-:16];
-    M_adder1_alufn = alufn[0+0-:1];
+    M_adder1_alufn[0+0-:1] = alufn[0+0-:1];
     M_adder2_a[0+15-:16] = a[0+15-:16];
     M_adder2_b[0+15-:16] = b[0+15-:16];
     M_adder2_s[0+15-:16] = M_adder1_s[0+15-:16];
+    M_mul_a[0+15-:16] = a[0+15-:16];
+    M_mul_b[0+15-:16] = b[0+15-:16];
+    M_mul_alufn[0+5-:6] = alufn[0+5-:6];
     M_bool_a[0+15-:16] = a[0+15-:16];
     M_bool_b[0+15-:16] = b[0+15-:16];
     M_bool_alufn[0+5-:6] = alufn[0+5-:6];
@@ -99,7 +107,12 @@ module alu_1 (
     M_compare_v[0+0-:1] = M_adder2_v[0+0-:1];
     M_compare_n[0+0-:1] = M_adder2_n[0+0-:1];
     if (alufn[4+1-:2] == 1'h0) begin
-      s[0+15-:16] = M_adder1_s[0+15-:16];
+      if (alufn[1+0-:1] == 1'h0) begin
+        s[0+15-:16] = M_adder1_s[0+15-:16];
+      end
+      if (alufn[1+0-:1] == 1'h1) begin
+        s[0+15-:16] = M_mul_s[0+15-:16];
+      end
     end
     if (alufn[4+1-:2] == 1'h1) begin
       s[0+15-:16] = M_bool_s[0+15-:16];

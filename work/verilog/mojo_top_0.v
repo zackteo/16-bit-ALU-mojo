@@ -29,9 +29,6 @@ module mojo_top_0 (
   reg rst;
   
   wire [16-1:0] M_alu_s;
-  wire [1-1:0] M_alu_v;
-  wire [1-1:0] M_alu_n;
-  wire [1-1:0] M_alu_z;
   reg [16-1:0] M_alu_a;
   reg [16-1:0] M_alu_b;
   reg [6-1:0] M_alu_alufn;
@@ -39,10 +36,7 @@ module mojo_top_0 (
     .a(M_alu_a),
     .b(M_alu_b),
     .alufn(M_alu_alufn),
-    .s(M_alu_s),
-    .v(M_alu_v),
-    .n(M_alu_n),
-    .z(M_alu_z)
+    .s(M_alu_s)
   );
   
   wire [1-1:0] M_reset_cond_out;
@@ -68,28 +62,32 @@ module mojo_top_0 (
   );
   localparam ADD_state = 5'd0;
   localparam SUB_state = 5'd1;
-  localparam CMPEQ_state = 5'd2;
-  localparam CMPLT_state = 5'd3;
-  localparam CMPLE_state = 5'd4;
-  localparam OR_state = 5'd5;
-  localparam NOR_state = 5'd6;
-  localparam XOR_state = 5'd7;
-  localparam A_state = 5'd8;
-  localparam B_state = 5'd9;
-  localparam AND_state = 5'd10;
-  localparam NAND_state = 5'd11;
-  localparam SHL_state = 5'd12;
-  localparam SHLA_state = 5'd13;
-  localparam SHR_state = 5'd14;
-  localparam SHRA_state = 5'd15;
-  localparam IDLE_state = 5'd16;
-  localparam FAIL_state = 5'd17;
-  localparam PASS_state = 5'd18;
+  localparam MUL_state = 5'd2;
+  localparam CMPEQ_state = 5'd3;
+  localparam CMPLT_state = 5'd4;
+  localparam CMPLE_state = 5'd5;
+  localparam OR_state = 5'd6;
+  localparam NOR_state = 5'd7;
+  localparam XOR_state = 5'd8;
+  localparam A_state = 5'd9;
+  localparam B_state = 5'd10;
+  localparam AND_state = 5'd11;
+  localparam NAND_state = 5'd12;
+  localparam SHL_state = 5'd13;
+  localparam SHLA_state = 5'd14;
+  localparam SHR_state = 5'd15;
+  localparam SHRA_state = 5'd16;
+  localparam IDLE_state = 5'd17;
+  localparam FAIL_state = 5'd18;
+  localparam PASS_state = 5'd19;
   
   reg [4:0] M_state_d, M_state_q = ADD_state;
   reg [27:0] M_counter_d, M_counter_q = 1'h0;
   
   always @* begin
+    M_state_d = M_state_q;
+    M_counter_d = M_counter_q;
+    
     M_reset_cond_in = ~rst_n;
     rst = M_reset_cond_out;
     led = 8'h00;
@@ -105,6 +103,96 @@ module mojo_top_0 (
     M_edge_dt_in = M_btn_cond_out;
     io_led[0+0+7-:8] = M_alu_s[0+7-:8];
     io_led[8+0+7-:8] = M_alu_s[8+7-:8];
+    M_counter_d = M_counter_q + 1'h1;
+    if (M_counter_q[0+25-:26] == 1'h0) begin
+      
+      case (M_state_q)
+        IDLE_state: begin
+          if (io_button[4+0-:1] == 1'h1) begin
+            M_state_d = ADD_state;
+          end
+        end
+        ADD_state: begin
+          M_alu_alufn[0+5-:6] = 1'h0;
+          M_alu_a[0+15-:16] = 44'h92fd31e7313;
+          M_alu_b[0+15-:16] = 10'h3e8;
+          if (M_alu_s == 45'h092fd31e76fb) begin
+            M_state_d = SUB_state;
+          end else begin
+            M_state_d = FAIL_state;
+          end
+        end
+        SUB_state: begin
+          M_alu_alufn[0+5-:6] = 1'h1;
+          M_alu_a[0+15-:16] = 44'h92fd31e7313;
+          M_alu_b[0+15-:16] = 10'h3e8;
+          if (M_alu_s == 45'h092fd31e6f2b) begin
+            M_state_d = MUL_state;
+          end else begin
+            M_state_d = FAIL_state;
+          end
+        end
+        MUL_state: begin
+          M_alu_alufn[0+5-:6] = 4'ha;
+          M_alu_a[0+15-:16] = 4'hb;
+          M_alu_b[0+15-:16] = 10'h3e8;
+          if (M_alu_s == $signed(11'h423)) begin
+            M_state_d = CMPEQ_state;
+          end else begin
+            M_state_d = FAIL_state;
+          end
+        end
+        CMPEQ_state: begin
+          M_alu_alufn[0+5-:6] = 4'ha;
+          M_alu_a[0+15-:16] = 4'hb;
+          M_alu_b[0+15-:16] = 4'hb;
+          if (M_alu_s == 1'h1) begin
+            M_state_d = CMPLT_state;
+          end else begin
+            M_state_d = FAIL_state;
+          end
+        end
+      endcase
+    end
+    
+    case (M_state_q)
+      IDLE_state: begin
+        io_led[16+6+1-:2] = 1'h1;
+      end
+      ADD_state: begin
+        io_led[16+1+0-:1] = 1'h1;
+      end
+      SUB_state: begin
+        io_led[16+2+0-:1] = 1'h1;
+      end
+      MUL_state: begin
+        io_led[16+3+0-:1] = 1'h1;
+      end
+      CMPEQ_state: begin
+        io_led[16+4+0-:1] = 1'h1;
+      end
+      CMPLT_state: begin
+        io_led[16+5+0-:1] = 1'h1;
+      end
+      CMPLE_state: begin
+        io_led[16+6+0-:1] = 1'h1;
+      end
+      OR_state: begin
+        io_led[16+7+0-:1] = 1'h1;
+      end
+      NOR_state: begin
+        io_led[16+0+0-:1] = 1'h1;
+        io_led[16+1+0-:1] = 1'h1;
+      end
+      XOR_state: begin
+        io_led[16+0+0-:1] = 1'h1;
+        io_led[16+2+0-:1] = 1'h1;
+      end
+      A_state: begin
+        io_led[16+0+0-:1] = 1'h1;
+        io_led[16+3+0-:1] = 1'h1;
+      end
+    endcase
   end
   
   always @(posedge clk) begin

@@ -15,10 +15,10 @@ module adder_16bit_1_5 (
   
   always @* begin
     s[0+15-:16] = 1'h0;
-    if (!(alufn[0+0-:1])) begin
+    if (alufn[0+0-:1] == 1'h0) begin
       s[0+15-:16] = a[0+15-:16] + b[0+15-:16];
     end
-    if (alufn[0+0-:1]) begin
+    if (alufn[0+0-:1] == 1'h1) begin
       s[0+15-:16] = a[0+15-:16] - b[0+15-:16];
     end
   end
