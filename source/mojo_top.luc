@@ -219,7 +219,7 @@ module mojo_top (
           }
 
         state.SHL:
-          alu.alufn[5:0]=010111;
+          alu.alufn[5:0]=100000;
           alu.a=b0000000000000001;
           alu.b=b0000000000000001;
           if (alu.s==b0000000000000010){
@@ -230,7 +230,7 @@ module mojo_top (
           }
 
         state.SHLA:
-          alu.alufn[5:0]=010111;
+          alu.alufn[5:0]=100010;
           alu.a=b0000000000000001;
           alu.b=b0000000000000001;
           if (alu.s==b0000000000000010){
@@ -241,7 +241,7 @@ module mojo_top (
           }
 
         state.SHR:
-          alu.alufn[5:0]=010111;
+          alu.alufn[5:0]=100001;
           alu.a=b1000000000000010;
           alu.b=b0000000000000001;
           if (alu.s==b0100000000000001){
@@ -252,7 +252,7 @@ module mojo_top (
           }
 
         state.SHRA:
-          alu.alufn[5:0]=010111;
+          alu.alufn[5:0]=100011;
           alu.a=b1000000000000010;
           alu.b=b0000000000000001;
           if (alu.s==b1100000000000001){
