@@ -32,11 +32,12 @@ module mojo_top (
     edge_detector edge_dt(#RISE(1),#FALL(0));
     .rst(rst) {
       fsm state = {
+      IDLE,
       ADD, SUB, MUL,
       CMPEQ, CMPLT, CMPLE, 
       OR, NOR, XOR, A, B, AND, NAND, 
       SHL, SHLA, SHR, SHRA, 
-      IDLE, FAIL, PASS};
+      FAIL, PASS};
     }
     dff counter[28];
   }
@@ -71,14 +72,14 @@ module mojo_top (
       
         state.IDLE:
           if (io_button[4]==1){
-            state.d = state.ADD;
+            state.d = state.NAND;
           }
           
         state.ADD:
           alu.alufn[5:0]=000000;
           alu.a[15:0]=0010101010101011;
           alu.b[15:0]=0000000000001000;
-          if (alu.s==0010101010101011+0000000000001000){
+          if (alu.s==0010101010110011){
             state.d = state.SUB;
           }
           else{
@@ -89,7 +90,7 @@ module mojo_top (
           alu.alufn[5:0]=000001;
           alu.a[15:0]=0010101010101011;
           alu.b[15:0]=0000000000001000;
-          if (alu.s==0010101010101011-0000000000001000){
+          if (alu.s==0010101010100011){
             state.d = state.MUL;
           }
           else{
@@ -99,8 +100,8 @@ module mojo_top (
         state.MUL:
           alu.alufn[5:0]=000010;
           alu.a[15:0]=0000000000000011;
-          alu.b[15:0]=0000000000001000;
-          if (alu.s==0000000000000011-0000000000001000){
+          alu.b[15:0]=0000000000000001;
+          if (alu.s==0000000000000011){
             state.d = state.CMPEQ;
           }
           else{
@@ -221,40 +222,49 @@ module mojo_top (
     case(state.q){
       
       state.IDLE:
-        io_led[2][7:6]=1;
+        io_led[2][7:6]=11;
         
       state.ADD:
-        io_led[2][1]=1;
+        io_led[0][0]=1;
         
       state.SUB:
-        io_led[2][2]=1;
+        io_led[0][1]=1;
         
       state.MUL:
-        io_led[2][3]=1;      
+        io_led[0][2]=1;      
         
       state.CMPEQ:
-        io_led[2][4]=1;  
+        io_led[0][3]=1;  
         
       state.CMPLT:
-        io_led[2][5]=1;  
+        io_led[0][4]=1;  
         
       state.CMPLE:
-        io_led[2][6]=1;
+        io_led[0][5]=1;
         
       state.OR:
-        io_led[2][7]=1;
+        io_led[0][6]=1;
             
       state.NOR:
-        io_led[2][0]=1;
-        io_led[2][1]=1;  
+        io_led[0][7]=1;
         
       state.XOR:
-        io_led[2][0]=1;
-        io_led[2][2]=1; 
+        io_led[1][0]=1;
         
       state.A:
-        io_led[2][0]=1;
-        io_led[2][3]=1;     
+        io_led[1][1]=1;   
+        
+      state.B:
+        io_led[1][2]=1;
+        
+      state.AND:
+        io_led[1][3]=1;
+        
+      state.NAND:
+        io_led[1][4]=1;       
+        
+      state.FAIL:
+        io_led[2][7:0]=11111111;   
     }
   }
 }
