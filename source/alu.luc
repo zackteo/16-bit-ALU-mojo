@@ -23,6 +23,7 @@ module alu (
     
     adder2.a[15:0] = a[15:0];
     adder2.b[15:0] = b[15:0];
+    adder2.alufn[0] = alufn[0];
     adder2.s[15:0] = adder1.s[15:0];
     
     //MUL

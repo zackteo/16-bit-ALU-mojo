@@ -212,6 +212,50 @@ module mojo_top (
           alu.a=b0000000011111111;
           alu.b=b0000111100001111;
           if (alu.s==b1111111111110000){
+            state.d = state.SHL;
+          }
+          else{
+            state.d = state.FAIL;
+          }
+
+        state.SHL:
+          alu.alufn[5:0]=010111;
+          alu.a=b0000000000000001;
+          alu.b=b0000000000000001;
+          if (alu.s==b0000000000000010){
+            state.d = state.SHLA;
+          }
+          else{
+            state.d = state.FAIL;
+          }
+
+        state.SHLA:
+          alu.alufn[5:0]=010111;
+          alu.a=b0000000000000001;
+          alu.b=b0000000000000001;
+          if (alu.s==b0000000000000010){
+            state.d = state.SHR;
+          }
+          else{
+            state.d = state.FAIL;
+          }
+
+        state.SHR:
+          alu.alufn[5:0]=010111;
+          alu.a=b1000000000000010;
+          alu.b=b0000000000000001;
+          if (alu.s==b0100000000000001){
+            state.d = state.SHRA;
+          }
+          else{
+            state.d = state.FAIL;
+          }
+
+        state.SHRA:
+          alu.alufn[5:0]=010111;
+          alu.a=b1000000000000010;
+          alu.b=b0000000000000001;
+          if (alu.s==b1100000000000001){
             state.d = state.PASS;
           }
           else{
