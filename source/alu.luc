@@ -30,7 +30,6 @@ module alu (
     mul.b[15:0] = b[15:0];
     mul.alufn[5:0] = alufn[5:0];
     
-    
     //BOOL
     bool.a[15:0] = a[15:0];
     bool.b[15:0] = b[15:0];
