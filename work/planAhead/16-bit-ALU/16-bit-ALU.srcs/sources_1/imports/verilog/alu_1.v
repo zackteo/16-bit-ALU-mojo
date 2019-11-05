@@ -27,12 +27,14 @@ module alu_1 (
   wire [1-1:0] M_adder2_z;
   wire [1-1:0] M_adder2_v;
   wire [1-1:0] M_adder2_n;
-  reg [16-1:0] M_adder2_a;
-  reg [16-1:0] M_adder2_b;
+  reg [1-1:0] M_adder2_a;
+  reg [1-1:0] M_adder2_b;
+  reg [1-1:0] M_adder2_alufn;
   reg [16-1:0] M_adder2_s;
   adder_16bit_2_6 adder2 (
     .a(M_adder2_a),
     .b(M_adder2_b),
+    .alufn(M_adder2_alufn),
     .s(M_adder2_s),
     .z(M_adder2_z),
     .v(M_adder2_v),
@@ -88,8 +90,9 @@ module alu_1 (
     M_adder1_a[0+15-:16] = a[0+15-:16];
     M_adder1_b[0+15-:16] = b[0+15-:16];
     M_adder1_alufn[0+0-:1] = alufn[0+0-:1];
-    M_adder2_a[0+15-:16] = a[0+15-:16];
-    M_adder2_b[0+15-:16] = b[0+15-:16];
+    M_adder2_a = a[15+0-:1];
+    M_adder2_b = b[15+0-:1];
+    M_adder2_alufn[0+0-:1] = alufn[0+0-:1];
     M_adder2_s[0+15-:16] = M_adder1_s[0+15-:16];
     M_mul_a[0+15-:16] = a[0+15-:16];
     M_mul_b[0+15-:16] = b[0+15-:16];

@@ -61,9 +61,12 @@ module mojo_top (
     btn_cond.in=io_button[4];
     edge_dt.in=btn_cond.out;
     
+    //setting leds to show alu output
     io_led[0][7:0] = alu.s[7:0];
     io_led[1][7:0] = alu.s[15:8];
     
+    
+    //state machine
     counter.d = counter.q + 1;
   
     if (counter.q[25:0]==0){
@@ -98,7 +101,7 @@ module mojo_top (
           }  
           
         state.MUL:
-          alu.alufn[5:0]=000010;
+          alu.alufn[5:0]=b000010;
           alu.a[15:0]=b0000000000000011;
           alu.b[15:0]=b0000000000000001;
           if (alu.s==b0000000000000011){
@@ -109,7 +112,7 @@ module mojo_top (
           }  
           
         state.CMPEQ:
-          alu.alufn[5:0]=110011;
+          alu.alufn[5:0]=b110011;
           alu.a[15:0]=b0000000000000011;
           alu.b[15:0]=b0000000000000011;
           if (alu.s==b0000000000000001){
@@ -120,10 +123,10 @@ module mojo_top (
           }   
           
         state.CMPLT:
-          alu.alufn[5:0]=110101;
-          alu.a=b0000000000000011;
-          alu.b=b0000000000000111;
-          if (alu.s==b0000000000000001){
+          alu.alufn[5:0]=b110101;
+          alu.a[15:0]=b0000000000000011;
+          alu.b[15:0]=b0000000000000111;
+          if (alu.s[15:0]==b0000000000000001){
             state.d = state.CMPLE;
           }
           else{
@@ -131,7 +134,7 @@ module mojo_top (
           }
 
         state.CMPLE:
-          alu.alufn[5:0]=110111;
+          alu.alufn[5:0]=b110111;
           alu.a=b0000000000000011;
           alu.b=b0000000000101011;
           if (alu.s==b0000000000000001){
@@ -142,10 +145,10 @@ module mojo_top (
           }
 
         state.OR:
-          alu.alufn[5:0]=011110;
-          alu.a=b0000000011111111;
-          alu.b=b0000111100001111;
-          if (alu.s==b0000111111111111){
+          alu.alufn[5:0]=b011110;
+          alu.a[15:0]=b0000000011111111;
+          alu.b[15:0]=b0000111100001111;
+          if (alu.s[15:0]==b0000111111111111){
             state.d = state.NOR;
           }
           else{
@@ -153,7 +156,7 @@ module mojo_top (
           }
 
         state.NOR:
-          alu.alufn[5:0]=010001;
+          alu.alufn[5:0]=b010001;
           alu.a=b0000000011111111;
           alu.b=b0000111100001111;
           if (alu.s==b1111000000000000){
@@ -164,7 +167,7 @@ module mojo_top (
           }
 
         state.XOR:
-          alu.alufn[5:0]=010110;
+          alu.alufn[5:0]=b010110;
           alu.a=b0000000011111111;
           alu.b=b0000111100001111;
           if (alu.s==b0000111111110000){
@@ -175,7 +178,7 @@ module mojo_top (
           }
 
         state.A:
-          alu.alufn[5:0]=011010;
+          alu.alufn[5:0]=b011010;
           alu.a=b0000000011111111;
           alu.b=b0000111100001111;
           if (alu.s==b0000000011111111){
@@ -186,7 +189,7 @@ module mojo_top (
           }
 
         state.B:
-          alu.alufn[5:0]=011100;
+          alu.alufn[5:0]=b010101;
           alu.a=b0000000011111111;
           alu.b=b0000111100001111;
           if (alu.s==b0000111100001111){
@@ -197,7 +200,7 @@ module mojo_top (
           }
 
         state.AND:
-          alu.alufn[5:0]=011000;
+          alu.alufn[5:0]=b011000;
           alu.a=b0000000011111111;
           alu.b=b0000111100001111;
           if (alu.s==b0000000000001111){
@@ -208,7 +211,7 @@ module mojo_top (
           }
 
         state.NAND:
-          alu.alufn[5:0]=010111;
+          alu.alufn[5:0]=b010111;
           alu.a=b0000000011111111;
           alu.b=b0000111100001111;
           if (alu.s==b1111111111110000){
@@ -219,7 +222,7 @@ module mojo_top (
           }
 
         state.SHL:
-          alu.alufn[5:0]=100000;
+          alu.alufn[5:0]=b100000;
           alu.a=b0000000000000001;
           alu.b=b0000000000000001;
           if (alu.s==b0000000000000010){
@@ -230,7 +233,7 @@ module mojo_top (
           }
 
         state.SHLA:
-          alu.alufn[5:0]=100010;
+          alu.alufn[5:0]=b100010;
           alu.a=b0000000000000001;
           alu.b=b0000000000000001;
           if (alu.s==b0000000000000010){
@@ -241,7 +244,7 @@ module mojo_top (
           }
 
         state.SHR:
-          alu.alufn[5:0]=100001;
+          alu.alufn[5:0]=b100001;
           alu.a=b1000000000000010;
           alu.b=b0000000000000001;
           if (alu.s==b0100000000000001){
@@ -252,7 +255,7 @@ module mojo_top (
           }
 
         state.SHRA:
-          alu.alufn[5:0]=100011;
+          alu.alufn[5:0]=b100011;
           alu.a=b1000000000000010;
           alu.b=b0000000000000001;
           if (alu.s==b1100000000000001){
@@ -305,13 +308,25 @@ module mojo_top (
         io_led[1][3]=1;
         
       state.NAND:
-        io_led[1][4]=1;       
+        io_led[1][4]=1;  
+        
+      state.SHL:
+        io_led[1][5]=1;
+        
+      state.SHLA:
+        io_led[1][6]=1;
+        
+      state.SHR:
+        io_led[1][7]=1;      
+        
+      state.SHRA:
+        io_led[2][0]=1;       
         
       state.FAIL:
-        io_led[2][7:4]=1111;   
+        io_led[2][7:4]=b1111;   
         
       state.PASS:
-        io_led[2][3:0]=1111;  
+        io_led[2][3:0]=b1111;  
     }
   }
 }

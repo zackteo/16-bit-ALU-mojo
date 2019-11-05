@@ -21,8 +21,8 @@ module alu (
     adder1.b[15:0] = b[15:0];
     adder1.alufn[0] = alufn[0];
     
-    adder2.a[15:0] = a[15:0];
-    adder2.b[15:0] = b[15:0];
+    adder2.a = a[15];
+    adder2.b = b[15];
     adder2.alufn[0] = alufn[0];
     adder2.s[15:0] = adder1.s[15:0];
     
