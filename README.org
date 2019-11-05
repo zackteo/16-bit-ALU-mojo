@@ -41,8 +41,8 @@
 |             |       0011 | SRA        | Shift Right Arithmetically (<<<) |
 |-------------+------------+------------+----------------------------------|
 |          11 |       0011 | COMPEQ     | Equal (==)                       |
-|             |       0101 | COMPLE     | Less than (<)                    |
-|             |       0111 | COMPLT     | Less than or Equal (<=)          |
+|             |       0101 | COMPLT     | Less than (<)                    |
+|             |       0111 | COMPLE     | Less than or Equal (<=)          |
 ** Implementation
 The 16-bit is made of the modules below and implemented as its own ALU module, making it hierarchical and modular, for reusability.
 The ALU module is then implemented in mojo_top.luc
