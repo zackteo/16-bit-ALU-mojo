@@ -1,0 +1,27 @@
+module adder_16bit_2 (
+    input a[16],
+    input b[16],
+    input alufn[1],
+    output s[16],
+    output z,  // zero
+    output v,  // overflow
+    output n   // negative
+  ) {
+    adder_16bit_1 adder1;
+    adder_16bit_2 adder2;
+  always {
+    adder1.a[15:0] = a[15:0];
+    adder1.b[15:0] = b[15:0];
+    adder1.alufn[0] = alufn[0];
+    
+    adder2.a = a[15];
+    adder2.b = b[15];
+    adder2.alufn[0] = alufn[0];
+    adder2.s[15:0] = adder1.s[15:0];
+
+    s[15:0] = adder1.s[15:0];
+    z = adder2.z;
+    v = adder2.v;
+    n = adder2.n;
+  }
+}

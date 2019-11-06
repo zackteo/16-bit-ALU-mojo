@@ -2,11 +2,13 @@ module alu (
     input a[16],
     input b[16],
     input alufn[6],
-    output s[16]
+    output s[16],
+    output z,
+    output n,
+    output v
   ) {
 
-  adder_16bit_1 adder1;
-  adder_16bit_2 adder2;
+  adder_16bit adder;
   boolean_16bit bool;
   shifter_16bit shift;
   compare16bit compare;
@@ -14,17 +16,15 @@ module alu (
   
   always {
     //Assign all output to 0
-    s[15:0] = 0;  
+    s[15:0] = 0;
+    v = 0;
+    n = 0;
+    z = 0;
     
     //ADD & SUB
-    adder1.a[15:0] = a[15:0];
-    adder1.b[15:0] = b[15:0];
-    adder1.alufn[0] = alufn[0];
-    
-    adder2.a = a[15];
-    adder2.b = b[15];
-    adder2.alufn[0] = alufn[0];
-    adder2.s[15:0] = adder1.s[15:0];
+    adder.a[15:0] = a[15:0];
+    adder.b[15:0] = b[15:0];
+    adder.alufn[0] = alufn[0];
     
     //MUL
     mul.a[15:0] = a[15:0];
@@ -51,11 +51,14 @@ module alu (
     if(alufn[5:4] == b00)
     {
       if (alufn[1]==0){
-        s[15:0] = adder1.s[15:0];
+        s[15:0] = adder.s[15:0];
       }
       if (alufn[1]==1){
         s[15:0] = mul.s[15:0];
       }
+      z = adder.z;
+      v = adder.v;
+      n = adder.n;
     }
     
     if(alufn[5:4] == b01)
